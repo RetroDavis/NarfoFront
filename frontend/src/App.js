@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.scss';
@@ -16,7 +17,7 @@ class App extends Component {
   }
 
   handleClick () {
-    axios.get('https://api.github.com/users/maecapozzi')
+    axios.get('https://api.github.com/users/MasulukeI')
       .then(response => this.setState({username: response.data.name}))
   }
 
