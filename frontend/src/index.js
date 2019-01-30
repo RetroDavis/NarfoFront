@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './css/clean-blog.min.scss';
 import About from './About';
+import Members from './Member';
 ReactDOM.render( <Router>
     <div>
       <nav class="navbar navbar-expand-lg  fixed-top" id="mainNav">
@@ -19,7 +20,7 @@ ReactDOM.render( <Router>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item">
-            <Link class="nav-link" to="/Home">Home</Link>
+            <Link class="nav-link" to="/">Home</Link>
           </li>
           <li class="nav-item">
           <Link class="nav-link" to="/About">About</Link>
@@ -36,6 +37,7 @@ ReactDOM.render( <Router>
   </nav>
 
    <Route  path='/About' component={About}/>
+   <Route  path='/Members' component={Members}/>
     <Route path="/" exact component={App}/>
     
 
