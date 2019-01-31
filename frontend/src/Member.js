@@ -10,7 +10,7 @@ class Member extends Component {
     axios.get('https://localhost:44341/Member/get/all')
     .then(response =>
       {
-        console.log(response.body);
+        console.log(response.data);
       }
       )
    // this.state = {
