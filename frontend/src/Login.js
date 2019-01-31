@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './Login.scss';
 import axios from 'axios'
-
+import { addMember } from './actions';
+import { connect } from 'react-redux';
 
 class Login extends Component {
   state = {
     members: {
       firstName: '',
       lastName: '',
-      userName: '',
+      username: '',
       password: ''
   }
   }
@@ -25,7 +26,7 @@ handleChangeLastName = event => {
     this.state.members.lastName = event.target.value;
 }
 handleChangeUserName = event => {
-    this.state.members.userName = event.target.value;
+    this.state.members.username = event.target.value;
 }
 handleChangePassWord = event => {
     this.state.members.password = event.target.value;
@@ -39,9 +40,13 @@ handleSubmit = event => {
     
     const user = this.state.members;
     console.log(user);
-    axios.post('https://localhost:44341/Member/set', { user })
+    console.log(JSON.stringify(user,['firstName','lastName','username','password']));
+    axios.post('https://localhost:44341/Member/set',user)
         .then(res => {
             console.log(res.data);
+            this.state.welcome = res.data.firstName;
+            
+           
         });
 };
 
