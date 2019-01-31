@@ -5,11 +5,11 @@ import axios from 'axios'
 
 class Member extends Component {
   state = {
-    members: []
+    members: [],
+    welcome: "Members"
   }
   constructor () {
     super()
-   const c = 5;
       
    // this.state = {
      // username: 'will be changed with name from Github API'
@@ -39,7 +39,7 @@ class Member extends Component {
             <div class="row">
               <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading text-success">
-                  <h1 >Members</h1>
+                  <h1 >{this.state.welcome}</h1>
                   <span class="subheading">at NARFO we care about all our members </span>
                 </div>
               </div>
