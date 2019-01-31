@@ -19,7 +19,7 @@ ReactDOM.render( <Router>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item">
-            <Link class="nav-link" to="/Home">Home</Link>
+            <Link class="nav-link" to="/">Home</Link>
           </li>
           <li class="nav-item">
           <Link class="nav-link" to="/About">About</Link>
