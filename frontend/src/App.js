@@ -30,7 +30,7 @@ class App extends Component {
   render () {
     return (
      <div>
-     <header class="masthead2  masthead ">
+     <header class="masthead3  masthead ">
      <div class="overlay"></div>
      <div class="container">
        <div class="row">
