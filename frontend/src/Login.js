@@ -8,9 +8,8 @@ class Login extends Component {
     members: []
   }
   constructor () {
-    super()
-   const c = 5;
-   
+    var d = 5;
+   super()
   }
 
   handleClick () {
@@ -40,7 +39,17 @@ class Login extends Component {
        
         <div class="container">
           <div class="row">
-         
+          <div class="wrapper">
+          <form class="form-signin">       
+            <h2 class="form-signin-heading text-success">Register Member</h2>
+            <input type="text" class="form-control text-center" name="firstName" placeholder="Enter FirstName" required="" autofocus="" />
+            <input type="text" class="form-control text-center" name="lastName" placeholder="Enter LastName" required="" autofocus="" />
+             <input type="text" class="form-control text-center" name="userName" placeholder="Enter Username" required="" autofocus="" />
+            <input type="password" class="form-control text-center" name="password" placeholder="Enter Password" required=""/> 
+
+            <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>   
+          </form>
+        </div>
           </div>
         </div>
     

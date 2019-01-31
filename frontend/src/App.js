@@ -25,8 +25,7 @@ class App extends Component {
     axios.get('https://api.github.com/users/MasulukeI')
       .then(response => this.setState({username: response.data.name}))
   }
-  componentDidMount () {
-  }
+  
   render () {
     return (
      <div>
