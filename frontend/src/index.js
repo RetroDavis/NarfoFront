@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link,Switch,Redirect } from "react-router-dom";
 import './css/clean-blog.min.scss';
 import About from './About';
 import Members from './Member';
@@ -44,12 +44,13 @@ ReactDOM.render( <Router>
       </div>
     </div>
   </nav>
-
+   <Switch>
    <Route  path='/About' component={About}/>
    <Route  path='/Members' component={Members}/>
    <Route  path='/Login' component={Login}/>
     <Route path="/" exact component={App}/>
-    
+    <Redirect from="/" to="/"></Redirect>
+    </Switch>
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
