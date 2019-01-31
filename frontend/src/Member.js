@@ -4,15 +4,13 @@ import axios from 'axios'
 
 
 class Member extends Component {
-
+  state = {
+    members: []
+  }
   constructor () {
     super()
-    axios.get('https://localhost:44341/Member/get/all')
-    .then(response =>
-      {
-        console.log(response.body);
-      }
-      )
+   const c = 5;
+      
    // this.state = {
      // username: 'will be changed with name from Github API'
    // }
@@ -24,6 +22,13 @@ class Member extends Component {
       .then(response => this.setState({username: response.data.name}))
   }
   componentDidMount () {
+    axios.get('https://localhost:44341/Member/get/all')
+    .then(response =>
+      {
+        const members =response.data;
+        this.setState({ members });
+        console.log(this.state.members);
+      })
   }
   render () {
     return (
@@ -45,7 +50,18 @@ class Member extends Component {
        
         <div class="container">
           <div class="row">
-            
+          <table class="table  table-borderless table-hover">
+          <thead className="thead-dark">
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.members.map(person => <tr><td>{person.firstName}</td><td>{person.lastName}</td><td>{person.username}</td></tr>)}
+          </tbody>
+        </table>
           </div>
         </div>
     
