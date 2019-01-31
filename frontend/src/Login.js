@@ -8,8 +8,10 @@ class Login extends Component {
     members: []
   }
   constructor () {
+
     var d = 5;
    super()
+
   }
 
   handleClick () {
@@ -39,6 +41,7 @@ class Login extends Component {
        
         <div class="container">
           <div class="row">
+
           <div class="wrapper">
           <form class="form-signin">       
             <h2 class="form-signin-heading text-success">Register Member</h2>
@@ -50,6 +53,7 @@ class Login extends Component {
             <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>   
           </form>
         </div>
+
           </div>
         </div>
     
