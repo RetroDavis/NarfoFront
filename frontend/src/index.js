@@ -12,6 +12,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './css/clean-blog.min.scss';
 import About from './About';
 import Members from './Member';
+import Login from './Login';
+
+
+
+
 ReactDOM.render( <Router>
     <div>
       <nav class="navbar navbar-expand-lg  fixed-top" id="mainNav">
@@ -42,6 +47,7 @@ ReactDOM.render( <Router>
 
    <Route  path='/About' component={About}/>
    <Route  path='/Members' component={Members}/>
+   <Route  path='/Login' component={Login}/>
     <Route path="/" exact component={App}/>
     
 
