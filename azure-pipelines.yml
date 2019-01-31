@@ -18,5 +18,7 @@ steps:
 - script: 
     cd frontend
     npm install
-    npm run build
+    npm run build --output $(Build.ArtifactStagingDirectory)
   displayName: 'npm install and build'
+
+- task: PublishBuildArtifacts@1
