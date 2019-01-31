@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import './App.scss';
 import axios from 'axios'
-import myWorker from './test.worker';
+
 
 
 class App extends Component {
@@ -16,17 +16,12 @@ class App extends Component {
 
     this.handleClick = this.handleClick.bind(this)
   }
-  componentDidMount() {
-    const worker = new myWorker();
-    worker.postMessage(this.state.counter);
-    worker.addEventListener('message', event => this.setState({counter: event.data}));
-}
+ 
   handleClick () {
     axios.get('https://api.github.com/users/MasulukeI')
       .then(response => this.setState({username: response.data.name}))
   }
-  componentDidMount () {
-  }
+  
   render () {
     return (
      <div>

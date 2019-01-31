@@ -7,9 +7,15 @@
     "bootstrap": "^4.2.1",
     "connected-react-router": "^6.2.2",
     "history": "^4.7.2",
+<<<<<<< HEAD
+    "jquery": "^1.9.1",
+    "node-sass": "^4.11.0",
+    "popper.js": "^1.14.6",
+=======
     "jquery": "^3.3.1",
     "node-sass": "^4.11.0",
     "popper.js": "^1.14.7",
+>>>>>>> 4b2a4cedc75ceaf2a056faa69778905a4f45a7ca
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
@@ -26,9 +32,9 @@
     "yarn": "^1.13.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
