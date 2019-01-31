@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import './Member.scss';
+import './Login.scss';
 import axios from 'axios'
 
 
-class Member extends Component {
+class Login extends Component {
   state = {
     members: []
   }
   constructor () {
-    super()
-   const c = 5;
-      
-   // this.state = {
-     // username: 'will be changed with name from Github API'
-   // }
-    //this.handleClick = this.handleClick.bind(this)
+
+    var d = 5;
+   super()
+
   }
 
   handleClick () {
@@ -22,25 +19,19 @@ class Member extends Component {
       .then(response => this.setState({username: response.data.name}))
   }
   componentDidMount () {
-    axios.get('https://localhost:44341/Member/get/all')
-    .then(response =>
-      {
-        const members =response.data;
-        this.setState({ members });
-        console.log(this.state.members);
-      })
+  
   }
   render () {
     return (
         <div>
-        <header class="masthead masthead4" >
+        <header class="masthead masthead5" >
           <div class="overlay"></div>
           <div class="container">
             <div class="row">
               <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading text-success">
-                  <h1 >Members</h1>
-                  <span class="subheading">at NARFO we care about all our members </span>
+                  <h1 >Member Login</h1>
+                  <span class="subheading">Security is very important </span>
                 </div>
               </div>
             </div>
@@ -50,18 +41,19 @@ class Member extends Component {
        
         <div class="container">
           <div class="row">
-          <table class="table  table-borderless table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-          { this.state.members.map(person => <tr><td>{person.firstName}</td><td>{person.lastName}</td><td>{person.username}</td></tr>)}
-          </tbody>
-        </table>
+
+          <div class="wrapper">
+          <form class="form-signin">       
+            <h2 class="form-signin-heading text-success">Register Member</h2>
+            <input type="text" class="form-control text-center" name="firstName" placeholder="Enter FirstName" required="" autofocus="" />
+            <input type="text" class="form-control text-center" name="lastName" placeholder="Enter LastName" required="" autofocus="" />
+             <input type="text" class="form-control text-center" name="userName" placeholder="Enter Username" required="" autofocus="" />
+            <input type="password" class="form-control text-center" name="password" placeholder="Enter Password" required=""/> 
+
+            <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>   
+          </form>
+        </div>
+
           </div>
         </div>
     
@@ -81,4 +73,4 @@ class Member extends Component {
 }
 }
 
-export default Member;
+export default Login;
