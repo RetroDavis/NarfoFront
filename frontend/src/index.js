@@ -54,7 +54,7 @@ ReactDOM.render( <Router>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/clean-blog.min.js"></script>
-    <script src="js/global.js"></script>
+    <script src="js/main.js"></script>
     </div>
 </Router>,
   document.getElementById('root'));
