@@ -45,10 +45,10 @@ ReactDOM.render( <Router>
     </div>
   </nav>
    <Switch>
-   <Route exact  path='/About' component={About}/>
-   <Route exact  path='/Members' component={Members}/>
-   <Route exact path='/Login' component={Login}/>
-    <Route path="/" component={App}/>
+   <Route  path='/About' component={About}/>
+   <Route  path='/Members' component={Members}/>
+   <Route path='/Login' component={Login}/>
+    <Route path="/" exact component={App}/>
     <Redirect from="/" to="/"></Redirect>
     </Switch>
     <script src="js/m.js"></script>
