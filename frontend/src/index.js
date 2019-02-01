@@ -49,7 +49,7 @@ ReactDOM.render( <Router>
    <Route  path='/Members' component={Members}/>
    <Route  path='/Login' component={Login}/>
     <Route path="/" exact component={App}/>
-    <Redirect from="/" to="/"></Redirect>
+    <Redirect from="*" to="/"></Redirect>
     </Switch>
     <script src="js/m.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
