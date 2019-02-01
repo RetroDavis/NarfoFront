@@ -29,7 +29,7 @@ ReactDOM.render( <Router>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item">
-            <Link class="nav-link" to="/Home">Home</Link>
+            <Link class="nav-link" to="/">Home</Link>
           </li>
           <li class="nav-item">
           <Link class="nav-link" to="/About">About</Link>
@@ -49,7 +49,7 @@ ReactDOM.render( <Router>
    <Route exact  path='/Members' component={Members}/>
    <Route exact path='/Login' component={Login}/>
     <Route path="/" component={App}/>
-    <Redirect from="/" to="/"></Redirect>
+    <Redirect from="" to="/"></Redirect>
     </Switch>
     <script src="js/m.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
