@@ -13,11 +13,18 @@ import './css/clean-blog.min.scss';
 import About from './About';
 import Members from './Member';
 import Login from './Login';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
 
 
 
+ReactDOM.render( 
+<Provider store ={store}>
+<Router>
 
-ReactDOM.render( <Router>
     <div>
       <nav class="navbar navbar-expand-lg  fixed-top" id="mainNav">
     <div class="container">
@@ -56,7 +63,7 @@ ReactDOM.render( <Router>
     <script src="js/clean-blog.min.js"></script>
     <script src="js/global.js"></script>
     </div>
-</Router>,
+</Router></Provider>,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
