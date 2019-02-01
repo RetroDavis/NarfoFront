@@ -32,7 +32,7 @@ class App extends Component {
          <div class="col-lg-8 col-md-10 mx-auto">
            <div class="site-heading text-success">
 
-             <h1>NARFO</h1>
+             <h1>NARFO1234</h1>
 
             
              <span class="subheading">National Association of Responsible Firearm Owners</span>
