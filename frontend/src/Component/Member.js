@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Member.scss';
+import '../scss/Member.scss';
 import axios from 'axios'
 
 

@@ -9,10 +9,10 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter as Router, Route, Link,Switch,Redirect } from "react-router-dom";
-import './css/clean-blog.min.scss';
-import About from './About';
-import Members from './Member';
-import Login from './Login';
+import './scss/clean-blog.min.scss';
+import About from './Component/About';
+import Members from './Component/Member';
+import Login from './Component/Login';
 
 
 
