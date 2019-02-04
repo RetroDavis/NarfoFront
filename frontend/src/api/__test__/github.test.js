@@ -22,4 +22,15 @@ describe('#getUser() using Promises', () => {
       expect(data.entity.name).toEqual('Itumeleng Masuluke')
     })
   })
+
+    it('Pulling from the back end', () => {
+        //Make the call and compare required with result;
+        // change API to that of the server side
+        expect(axios.get('https://localhost:44341/Member/get/all')).toBeDefined()
+
+    })
+
+
+
+
 })
