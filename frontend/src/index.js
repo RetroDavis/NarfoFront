@@ -7,17 +7,28 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter as Router, Route, Link,Switch,Redirect } from "react-router-dom";
 import './css/clean-blog.min.scss';
 import About from './About';
 import Members from './Member';
 import Login from './Login';
+import { Provider } from 'react-redux';
+import { createStore,applyMiddleware,compose } from 'redux';
+import RootReducer from './reducers';
 
+const initialState = {};
 
+const loggerMiddleware = createLogger();
+const store = createStore(RootReducer,initialState,compose(applyMiddleware(
+  thunkMiddleware,
+  loggerMiddleware),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 
-
-ReactDOM.render( <Router>
+ReactDOM.render(
+  <Provider store={store}>
+  <Router>
     <div>
       <nav class="navbar navbar-expand-lg  fixed-top" id="mainNav">
     <div class="container">
@@ -56,7 +67,9 @@ ReactDOM.render( <Router>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/clean-blog.min.js"></script>
     </div>
-</Router>,
+</Router>
+</Provider>
+,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

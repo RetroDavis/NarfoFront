@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       username: 'will be changed with name from Github API'
     }
+    
 
     this.handleClick = this.handleClick.bind(this)
   }
