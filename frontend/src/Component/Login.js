@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Login.scss';
+import '../scss/Login.scss';
 import axios from 'axios'
-import { addMember } from './actions';
+import { addMember } from '../actions/actions';
 import { connect } from 'react-redux';
 
 class Login extends Component {
