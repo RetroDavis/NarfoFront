@@ -115,4 +115,6 @@ Login.propTypes = {
   LogAdmin: PropTypes.func.isRequired
 };
 
+
+
 export default connect(null,{LogMember,LogAdmin})(Login);
