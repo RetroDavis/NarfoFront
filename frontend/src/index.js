@@ -17,7 +17,7 @@ import Members from './Member';
 import Login from './Login';
 import { Provider } from 'react-redux';
 import { createStore,applyMiddleware,compose } from 'redux';
-import RootReducer from './reducers';
+import RootReducer from './reducers/index';
 
 const initialState = {};
 
