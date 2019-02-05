@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './Login.scss';
 import axios from 'axios'
-import { addMember } from './actions';
-import { connect } from 'react-redux';
 
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {LogAdmin,LogMember } from './actions/user.action';
 class Login extends Component {
   state = {
     members: {
@@ -13,11 +14,10 @@ class Login extends Component {
       password: ''
   }
   }
-  constructor () {
 
+  constructor (props) {
     var d = 5;
-   super()
-
+   super(props);
   }
 
 
@@ -42,14 +42,16 @@ handleSubmit = event => {
     
     const user = this.state.members;
     console.log(user);
-    console.log(JSON.stringify(user,['firstName','lastName','username','password']));
-    axios.post('https://localhost:44341/Member/set',user)
-        .then(res => {
-            console.log(res.data);
-            this.state.welcome = res.data.firstName;
+   // console.log(JSON.stringify(user,['firstName','lastName','username','password']));
+   // axios.post('https://localhost:44341/Member/set',user)
+      //  .then(res => {
+      //      console.log(res.data);
+         //   this.state.welcome = res.data.firstName;
             
            
-        });
+      //  });
+
+      this.props.LogMember(user.firstName);
 };
 
   handleClick () {
@@ -110,4 +112,12 @@ handleSubmit = event => {
 }
 }
 
-export default Login;
+
+Login.propTypes = {
+  LogMember: PropTypes.func.isRequired,
+  LogAdmin: PropTypes.func.isRequired
+};
+
+
+
+export default connect(null,{LogMember,LogAdmin})(Login);

@@ -8,13 +8,9 @@ class Member extends Component {
     members: [],
     welcome: "Members"
   }
-  constructor () {
-    super()
-      
-   // this.state = {
-     // username: 'will be changed with name from Github API'
-   // }
-    //this.handleClick = this.handleClick.bind(this)
+  constructor (props) {
+    super(props);
+ 
   }
 
   handleClick () {
@@ -80,5 +76,6 @@ class Member extends Component {
         </footer></div> )
 }
 }
+
 
 export default Member;
