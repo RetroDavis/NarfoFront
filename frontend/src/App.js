@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import './App.scss';
 import axios from 'axios'
-import myWorker from './test.worker';
+
 
 
 class App extends Component {
@@ -17,11 +17,7 @@ class App extends Component {
 
     this.handleClick = this.handleClick.bind(this)
   }
-  componentDidMount() {
-    const worker = new myWorker();
-    worker.postMessage(this.state.counter);
-    worker.addEventListener('message', event => this.setState({counter: event.data}));
-}
+ 
   handleClick () {
     axios.get('https://api.github.com/users/MasulukeI')
       .then(response => this.setState({username: response.data.name}))
@@ -36,7 +32,10 @@ class App extends Component {
        <div class="row">
          <div class="col-lg-8 col-md-10 mx-auto">
            <div class="site-heading text-success">
-             <h1>NARFO</h1>
+
+             <h1>NARFO1234</h1>
+
+            
              <span class="subheading">National Association of Responsible Firearm Owners</span>
            </div>
          </div>

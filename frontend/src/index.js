@@ -56,16 +56,18 @@ ReactDOM.render(
     </div>
   </nav>
    <Switch>
-   <Route  path='/About' component={About}/>
-   <Route  path='/Members' component={Members}/>
-   <Route  path='/Login' component={Login}/>
-    <Route path="/" exact component={App}/>
-    <Redirect from="/" to="/"></Redirect>
+   <Route exact  path='/About' component={About}/>
+   <Route exact  path='/Members' component={Members}/>
+   <Route exact path='/Login' component={Login}/>
+    <Route path="/" component={App}/>
+    <Redirect from="" to="/"></Redirect>
     </Switch>
-
+    <script src="js/m.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/clean-blog.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/m.js"></script>
     </div>
 </Router>
 </Provider>
@@ -75,4 +77,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

@@ -14,6 +14,7 @@ class Login extends Component {
       password: ''
   }
   }
+
   constructor (props) {
     var d = 5;
    super(props);
@@ -80,6 +81,7 @@ handleSubmit = event => {
        
         <div class="container">
           <div class="row">
+
           <div class="wrapper">
              <form class="form-signin" onSubmit={this.handleSubmit}>       
         <h2 class="form-signin-heading text-success">Register Member</h2>
@@ -90,6 +92,7 @@ handleSubmit = event => {
 
         <button class="btn btn-lg btn-success btn-block" type="submit">Register</button> </form>
         </div>
+
           </div>
         </div>
     

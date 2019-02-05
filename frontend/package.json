@@ -23,13 +23,14 @@
     "redux-thunk": "^2.3.0",
     "rest": "^2.0.0",
     "save": "^2.3.3",
+    "serve": "^10.1.1",
     "sinon": "^7.2.3",
     "yarn": "^1.13.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
