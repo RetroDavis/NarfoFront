@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
@@ -7,9 +9,21 @@ import Fab from '@material-ui/core/Fab';
 import NavigateNext from '@material-ui/icons/NavigateNext';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
-export default class MemberApplication extends Component {
+const styles = theme => ({
+    root: {
+      height: '100vh',
+    },
+    linkRight: {
+        textDecoration: 'none',
+        color: 'black',
+        fontWeight : 410,
+      },
+  });
+
+class MemberApplication extends Component {
    
     constructor(props) {
         super(props);
@@ -148,11 +162,19 @@ export default class MemberApplication extends Component {
                     />
                     Female
                     <br />
-                    <Fab color="primary" aria-label="Add" type="Submit" >
-                        <NavigateNext></NavigateNext>
-                    </Fab>
+                    <Link  to="/MemberAddress">
+                        <Fab color="primary" aria-label="Add" type="Submit">
+                            <NavigateNext></NavigateNext>
+                        </Fab>
+                    </Link>
                 </form>
             </div>
         )
     }
 }
+
+MemberApplication.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+  export default withStyles(styles)(MemberApplication);

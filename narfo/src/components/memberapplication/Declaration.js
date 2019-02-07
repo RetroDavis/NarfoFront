@@ -4,6 +4,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import Fab from '@material-ui/core/Fab';
 import NavigateNext from '@material-ui/icons/NavigateNext';
+import ArrowBack from '@material-ui/icons/NavigateBefore';
+import { Link } from "react-router-dom";
 
 export default class MemeberSeven extends Component {
     constructor(props){
@@ -50,7 +52,7 @@ export default class MemeberSeven extends Component {
     return (
       <div>
         <h1>Membership Application</h1>
-        <h2>Membership Details</h2>
+        <h2>Decleration</h2>
         <form onSubmit={this.handleSubmit}>
             <label>
                 Are you well acquainted with the current 
@@ -149,9 +151,18 @@ export default class MemeberSeven extends Component {
                 />
                 Yes    
             </label><br/>
-                <Fab color="primary" aria-label="Add" type="Submit" >
-                    <NavigateNext></NavigateNext>
-                </Fab>
+            
+                <Link to="/LoginDetails">
+                        <Fab color="primary" aria-label="Add" type="Submit">
+                            <ArrowBack></ArrowBack>
+                        </Fab>
+                 </Link>
+                 <Link to="/SalesDetails">
+                        <Fab color="primary" aria-label="Add" type="Submit">
+                           <NavigateNext></NavigateNext>
+                        </Fab>
+                 </Link>
+               
       </form>
       </div>
     )
