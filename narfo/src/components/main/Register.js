@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MainRegister  from '../registerPage/MainRegister';
-
+import MemberApplication from '../memberapplication/MemberApplication';
 const styles = theme => ({
   root: {
     height: '100vh',
@@ -14,7 +14,7 @@ class Register extends Component {
     const {classes} = this.props;
     return (
       <div className={classes.root}>
-        <MainRegister></MainRegister>
+      <MemberApplication></MemberApplication>
       </div>
     )
   }
