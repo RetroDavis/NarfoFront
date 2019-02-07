@@ -1,17 +1,14 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
-
 import Adapter from 'enzyme-adapter-react-16';
 import MemberApplication from './MemberApplication';
 
-
 configure({adapter: new Adapter()});
-
 
 describe('<MemberApplication />', () => {
 
-    it('should render without throwing an error', () => {
-        expect(shallow(<MemberApplication/>).find('form.Register').exists()).toBe(true)
+      it('should render without throwing an error', () => {
+          expect(shallow(<MemberApplication/>).find('form.Register').exists()).toBe(true)
       })
 
       it('checks ', () => {
