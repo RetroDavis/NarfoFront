@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route ,Switch, Redirect} from "react-router-do
 import Home from './components/main/Home';
 import Login from './components/main/Login';
 import Register from './components/main/Register';
+import NavBar from './components/navBar/NavBar';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
+          <NavBar></NavBar>
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/Login" component={Login} exact />
