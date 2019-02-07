@@ -14,14 +14,14 @@ export default class MemberApplication extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullName: '',
+            FullName: '',
             Surname: '',
             IDNum: '',
             Cell: '',
             Occupation: '',
             Ethnicity: '',
             Gender: '',
-            labelWidth: 0
+            LabelWidth: 0
         }
     }
 
@@ -57,8 +57,8 @@ export default class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Full Name"
-                        value={this.state.fullName}
-                        onChange={this.handleChange('fullName')}
+                        value={this.state.FullName}
+                        onChange={this.handleChange('FullName')}
                         margin="normal"
                         variant="outlined"
                     />
@@ -113,7 +113,7 @@ export default class MemberApplication extends Component {
                                 input={
                                     <OutlinedInput
                                         name="Ethnicity"
-                                        labelWidth={this.state.labelWidth}
+                                        labelWidth={this.state.LabelWidth}
                                         id="outlined-Ethnicity-native-simple"
                                     />
                                 }
