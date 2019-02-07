@@ -31,9 +31,7 @@ export default class MemberPage5 extends Component {
   };
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    this.setState({ [name]: event.target.checked });
   };
 
   handleInputChange = event => {
@@ -145,8 +143,8 @@ export default class MemberPage5 extends Component {
             I Hereby Accept the electronic communication policy:
             <Checkbox
               checked={this.state.communication_Policy}
-              onChange={this.handleChange("communication_policy")}
-              value="Yes"
+              onChange={this.handleChange("communication_Policy")}
+              value="communication_Policy"
             />
           </label>
           <br/>

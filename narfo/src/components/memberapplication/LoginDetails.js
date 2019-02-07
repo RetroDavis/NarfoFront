@@ -14,15 +14,12 @@ export default class MemberUserName extends Component {
       UserName: "",
       PassWord: "",
       PassWordConfirm: "",
-      Declaration: "",
       Delaraction_Acceptance: false
     };
   }
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    this.setState({ [name]: event.target.checked });
   };
 
   handleInputChange = event => {
@@ -49,12 +46,6 @@ export default class MemberUserName extends Component {
   };
 
   render() {
-    const { Email } = this.state;
-    const { UserName } = this.state;
-    const { PassWord } = this.state;
-    const { PassWordConfirm } = this.state;
-    const { Declaration } = this.state;
-    const { Delaraction_Acceptance } = this.state;
 
     return (
       <div>
@@ -110,10 +101,10 @@ export default class MemberUserName extends Component {
           <label>
             I Accept:
             <Checkbox
-              checked={this.state.Delaraction_Acceptance}
-              onChange={this.handleChange("Declaration_acceptance")}
-              value="Declaration"
-            />
+                    checked={this.state.Delaraction_Acceptance}
+                    onChange={this.handleChange('Delaraction_Acceptance')}
+                    value="Delaraction_Acceptance"
+                />
           </label><br/>
           <Link to="/MemberAddress">
             <Fab color="primary" aria-label="Add" type="Submit">
