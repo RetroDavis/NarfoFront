@@ -11,13 +11,11 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     flex:6,
     height:'100vh',
-
   },
 });
 
-function PaperSheet(props) {
+function MainLogin(props) {
   const { classes } = props;
-
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
@@ -32,8 +30,8 @@ function PaperSheet(props) {
   );
 }
 
-PaperSheet.propTypes = {
+MainLogin.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(MainLogin);

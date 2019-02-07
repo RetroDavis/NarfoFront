@@ -11,11 +11,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     flex:6,
     height:'100vh',
-
   },
 });
 
-function PaperSheet(props) {
+function MainHome(props) {
   const { classes } = props;
 
   return (
@@ -35,8 +34,8 @@ function PaperSheet(props) {
   );
 }
 
-PaperSheet.propTypes = {
+MainHome.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(MainHome);

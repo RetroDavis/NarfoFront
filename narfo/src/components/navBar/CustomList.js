@@ -14,12 +14,12 @@ const styles = theme => ({
     button: {
         margin: "0px",
     },
-    link:{
+    link: {
         textDecoration: 'none',
         color: 'black',
         fontWeight : theme.typography.fontWeightRegular,
     },
-        list:{
+    list: {
         margin:0,
         backgroundColor:'#d0d0d0',
     },
@@ -27,7 +27,7 @@ const styles = theme => ({
 
 class CustomList extends Component {
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <div>
         <List className={classes.list}>

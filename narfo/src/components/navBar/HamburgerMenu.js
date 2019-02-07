@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -16,7 +16,7 @@ const styles = {
 };
 
 class HamburgerMenu extends React.Component {
-  
+
   state = {
     HamburgerToggled: false,
   };
@@ -28,12 +28,13 @@ class HamburgerMenu extends React.Component {
   };
 
   render() {
-    var headings = ['About', 'Hunting', 'Sport Shooting', 'Firearm Owners'];//for later automation of expansion tabs (Dont forget about idea to automate this)
-    var aboutHeadings =["About NARFO", "Objectives", "Codes of Conduct", "Wildman Outlets", "Contact"];
-    var huntingHeadings = ["NARFO Hunting", "Hunting Today", "Occasional Hunter", "Dedicated Hunter Status", "Hunter Theoretical Assessment", "Hunter Practical Assessment", "Dedicated Hunter Application"];
-    var sportShootingHeadings =["Occasional Sport Shooter", "Dedicated Sport Shooter Status", "Sport Shooting Rules", "Sport Shooter Theoretical Assessment", "Dedicated Sport Shooter Application"];
-    var firarmOwnerHeadings=["License Application Process","Self Defense","Motivations","Crimeline"];
-    const { classes } = this.props;
+    const headings = ['About', 'Hunting', 'Sport Shooting', 'Firearm Owners'];//for later automation of expansion tabs (Dont forget about idea to automate this after design has been approved)
+    //This is the current headings and sub categories for the menu panel, this changes so often ive just decided to leave it here till it gets finalised
+    // const aboutHeadings =["About NARFO", "Objectives", "Codes of Conduct", "Wildman Outlets", "Contact"];
+    // const huntingHeadings = ["NARFO Hunting", "Hunting Today", "Occasional Hunter", "Dedicated Hunter Status", "Hunter Theoretical Assessment", "Hunter Practical Assessment", "Dedicated Hunter Application"];
+    // const sportShootingHeadings =["Occasional Sport Shooter", "Dedicated Sport Shooter Status", "Sport Shooting Rules", "Sport Shooter Theoretical Assessment", "Dedicated Sport Shooter Application"];
+    // const firarmOwnerHeadings=["License Application Process","Self Defense","Motivations","Crimeline"];
+    const {classes} = this.props;
 
     const sideList = (
       <div className={classes.list}>

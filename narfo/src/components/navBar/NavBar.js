@@ -17,8 +17,9 @@ const theme = createMuiTheme({
     primary: { main: '#D8D8D8' }, 
     secondary: { main: '#6BC20A' }, // This is just green.A700 as hex.
   },
-  typography: { useNextVariants: true },
-  
+  typography: { 
+    useNextVariants: true,
+  },
 });
 
 const styles = {
@@ -26,7 +27,6 @@ const styles = {
     flexGrow: 1,
   },
   grow: {
-    
     flexGrow: 1,
   },
   menuButton: {
@@ -56,12 +56,12 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  link:{
+  linkLeft: {
     textDecoration: 'none',
     color: '#6BC20A',
     fontWeight : theme.typography.fontWeightRegular,
   },
-  link2:{
+  linkRight: {
     textDecoration: 'none',
     color: 'black',
     fontWeight : 410,
@@ -93,20 +93,17 @@ function ButtonAppBar(props) {
       <div className={classes.root}>
         <AppBar position="static" color="primary">
           <Toolbar>
-            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton> */}
-            <HamburgerMenu></HamburgerMenu>
+            <HamburgerMenu/>
             <Typography align="left" variant="h6" color="secondary" className={classes.grow}>
-              <Link className={classes.link} to='/'>NARFO</Link>
+              <Link className={classes.linkLeft} to='/'>NARFO</Link>
             </Typography>
             <Button color="inherit">
-              <Link className={classes.link2} to="/Login">
+              <Link className={classes.linkRight} to="/Login">
                 Login
               </Link>
             </Button>
             <Button color="inherit">
-              <Link className={classes.link2} to="/Register">
+              <Link className={classes.linkRight} to="/Register">
                 Register
               </Link>
             </Button>
