@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -163,7 +164,7 @@ class MemberApplication extends Component {
                     Female
                     <br />
                     <Link  to="/MemberAddress">
-                        <Fab color="primary" aria-label="Add" type="Submit">
+                        <Fab color="primary" aria-label="Add" type="Submit" onClick={this.props.onMemberDetailsSubmit}>
                             <NavigateNext></NavigateNext>
                         </Fab>
                     </Link>
@@ -176,5 +177,19 @@ class MemberApplication extends Component {
 MemberApplication.propTypes = {
     classes: PropTypes.object.isRequired,
   };
+
+const mapStateToProps = state => {
+    return {
+        currPage: state.currentPage,
+        memDetails: state.memberDetails
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onMemberDetailsSubmit: () => dispatch({type: 'SUBMIT_MEMBER_DETAILS'}),
+        onFullNameChange: (fn) => dispatch({type: 'UPDATE_FULLNAME', fullname:fn})
+    }
+}
   
-  export default withStyles(styles)(MemberApplication);
+  export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MemberApplication));
