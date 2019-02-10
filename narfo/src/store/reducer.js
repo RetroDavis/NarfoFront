@@ -13,10 +13,10 @@ const initialState = {
 
 const reducer = (state=initialState,action) => {
     switch(action.type){
-        case 'SUBMIT_MEMBER_DETAILS':
+        case 'UPDATE_CURRENT_PAGE':
             return{
-                currentPage:'/MemberAddress',
-                memberDetails:action.payload,
+                ...state,
+                currentPage: action.currPage,
         }
         case 'UPDATE_FULLNAME':
             const newMemberDetails ={

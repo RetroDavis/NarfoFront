@@ -57,6 +57,10 @@ class MemberApplication extends Component {
         });
     };
 
+    handleOnClick = () => {
+        this.props.onPageChange("/MembershipDetails")
+    }
+
     handleOptionChange = changeEvent => {
         this.setState({
             Gender: changeEvent.target.value
@@ -164,7 +168,7 @@ class MemberApplication extends Component {
                     Female
                     <br />
                     <Link  to="/MemberAddress">
-                        <Fab color="primary" aria-label="Add" type="Submit" onClick={this.props.onMemberDetailsSubmit}>
+                        <Fab color="primary" aria-label="Add" type="Submit" onClick={this.handleOnClick}>
                             <NavigateNext></NavigateNext>
                         </Fab>
                     </Link>
@@ -187,9 +191,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMemberDetailsSubmit: () => dispatch({type: 'SUBMIT_MEMBER_DETAILS'}),
+        onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
         onFullNameChange: (fn) => dispatch({type: 'UPDATE_FULLNAME', fullname:fn})
     }
 }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MemberApplication));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MemberApplication));

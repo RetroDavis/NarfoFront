@@ -13,7 +13,12 @@ class Register extends Component {
     const {classes} = this.props;
     return (
       <div className={classes.root}>
-      <MemberDetails/>
+        <div>
+          <MemberDetails/>
+        </div>
+        <div className='NavFooter'>
+            
+        </div>
       </div>
     )
   }
