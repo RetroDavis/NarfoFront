@@ -22,8 +22,21 @@ export default class MemberPage5 extends Component {
       Store_list: "",
       CurrentMember_Associaton: false,
       communication_Policy: false,
-      labelWidth: 0
+      labelWidth: 0,
+      isLoaded: false,
+      CallResult: [],
     };
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:44327/api/salesreps/get/all/sales')
+    .then(res => res.json())
+    .then(json => {
+        this.setState({
+            isLoaded: true,
+            CallResult: json
+        })
+    });
   }
 
   handleOptionChange = event => {
@@ -40,14 +53,19 @@ export default class MemberPage5 extends Component {
       [event.target.name]: event.target.value
     });
   };
+  handleSubmit = (event) => {
+   event.preventDefault()
+   console.log(this.state.CallResult);
+}
 
   render() {
+    let { isLoaded, items } = this.state;
     const { Accept_Electronic_Comms } = this.state;
     const { Sales_Representitive } = this.state;
-    const { Sales_list } = ["hello", "goodbye"];
+    const Sales_list = ["hello", "goodbye"];
     const { Store } = this.state;
     const { CurrentMember_Associaton } = this.state;
-
+  
     // let Sales_list = this.props.state.Sales_list;
     // let optionItems = Sales_list.map((planet) =>
     //         <option key={planet.name}>{planet.name}</option>
@@ -56,7 +74,7 @@ export default class MemberPage5 extends Component {
       <div>
          <h1>Membership Application</h1>
         <h2>Sales decleration</h2><br/>
-        <form onSubmit={this.handelSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <FormControl variant="outlined">
             <InputLabel
               ref={ref => {
@@ -78,12 +96,9 @@ export default class MemberPage5 extends Component {
                 />
               }
             >
-              <option value="Sales" />
-              <option value={"cello"}>cello</option>
-              <option value={"Ntumi"}>Ntumi</option>
-              <option value={"Micky"}>Micky</option>
-              <option value={"MVP"}>MVP</option>
-              <option value={"Thandi"}>Thandi</option>
+               {this.state.CallResult.map((name, index) => (
+                <option value={name.name}>{name.name}</option>
+              ))}
             </Select>
           </FormControl>
           <br />
@@ -128,7 +143,7 @@ export default class MemberPage5 extends Component {
               name="radio-button-demo"
               aria-label="Yes"
             />
-            Male
+            Yes
             <Radio
               checked={this.state.CurrentMember_Associaton === "No"}
               onChange={this.handleOptionChange}
@@ -136,7 +151,7 @@ export default class MemberPage5 extends Component {
               name="radio-button-demo"
               aria-label="No"
             />
-            Female
+            No
           </label>
           <br />
           <label>

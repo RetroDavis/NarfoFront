@@ -42,7 +42,7 @@ class MemberApplication extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         const userdata = this.state;
-        axios.post('http://narfo.retrotest.co.za/Member/set', userdata)
+        axios.post('https://localhost:44327/Member/set', userdata)
             .then(res => {
                 console.log(res.data);
 
@@ -165,7 +165,7 @@ class MemberApplication extends Component {
                     <Link  to="/MemberAddress">
                         <Fab color="primary" aria-label="Add" type="Submit">
                             <NavigateNext></NavigateNext>
-                        </Fab>
+                        </Fab>  
                     </Link>
                 </form>
             </div>
