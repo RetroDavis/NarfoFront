@@ -1,6 +1,6 @@
 const initialState = {
     currentPage:'/Home',
-    memberDetails : {
+    signupDetails : {
         FullName: '',
         Surname: '',
         IDNum: '',
@@ -8,6 +8,25 @@ const initialState = {
         Occupation: '',
         Ethnicity: '',
         Gender: '',
+        ResidentialAd: "",
+        City: "",
+        Province: "",
+        Country: "",
+        PostalCode: "",
+        FCA: '',
+        Storage : '',
+        Guilty : '',
+        CoC: false,
+        DC: false,
+        DocTrue: false,
+        Electronic: false,
+        Accept_Electronic_Comms: false,
+        Sales_Representitive: "",
+        Sales_list: "",
+        Store: "",
+        Store_list: "",
+        CurrentMember_Associaton: false,
+        communication_Policy: false,
     },
 }
 
@@ -18,14 +37,14 @@ const reducer = (state=initialState,action) => {
                 ...state,
                 currentPage: action.currPage,
         }
-        case 'UPDATE_FULLNAME':
+        case 'UPDATE_MEMBER_DETAILS':
             const newMemberDetails ={
-                ...state.memberDetails,
-                FullName:action.fullname,
+                ...state.signupDetails,
+                [action.varName]:action.varValue,
             }
             return{
                 ...state, 
-                memberDetails:newMemberDetails
+                signupDetails:newMemberDetails,
         }
         default:
         return state

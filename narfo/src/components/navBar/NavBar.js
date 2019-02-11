@@ -98,16 +98,16 @@ function ButtonAppBar(props) {
             <Typography align="left" variant="h6" color="secondary" className={classes.grow}>
               <Link className={classes.linkLeft} to='/'>NARFO</Link>
             </Typography>
-            <Button color="inherit">
-              <Link className={classes.linkRight} to="/Login">
+            <Link className={classes.linkRight} to="/Login">
+              <Button color="inherit">
                 Login
-              </Link>
-            </Button>
-            <Button color="inherit">
-              <Link className={classes.linkRight} to="/Register">
+              </Button>
+            </Link> 
+            <Link className={classes.linkRight} to="/Register">
+              <Button color="inherit">
                 Register
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
