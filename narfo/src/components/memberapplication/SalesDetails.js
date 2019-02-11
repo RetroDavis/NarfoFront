@@ -47,6 +47,10 @@ class SalesDetails extends Component {
     this.props.onMemberDetailsChange(event.target.value,name);;
   };
 
+  handlePolicyOption = name => event => {
+    this.props.onMemberDetailsChange(event.target.checked,name);;
+  };
+
   handleInputChange = event => {
     event.preventDefault();
     this.setState({
@@ -160,7 +164,7 @@ class SalesDetails extends Component {
             I Hereby Accept the electronic communication policy:
             <Checkbox
               checked={this.props.memDetails.communication_Policy}
-              onChange={this.handleChange("communication_Policy")}
+              onChange={this.handlePolicyOption("communication_Policy")}
               value="communication_Policy"
             />
           </label>
