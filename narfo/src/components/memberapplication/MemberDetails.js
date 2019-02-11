@@ -26,35 +26,32 @@ const styles = theme => ({
 
 class MemberApplication extends Component {
    
-    constructor(props) {
-        super(props);
-        this.state = {
-            FullName: '',
-            Surname: '',
-            IDNum: '',
-            Cell: '',
-            Occupation: '',
-            Ethnicity: '',
-            Gender: '',
-            LabelWidth: 0
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         FullName: '',
+    //         Surname: '',
+    //         IDNum: '',
+    //         Cell: '',
+    //         Occupation: '',
+    //         Ethnicity: '',
+    //         Gender: '',
+    //         LabelWidth: 0
+    //     }
+    // }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        const userdata = this.state;
-        axios.post('http://narfo.retrotest.co.za/Member/set', userdata)
-            .then(res => {
-                console.log(res.data);
-
-            })
-        console.log(userdata)
-    }
+    // handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     const userdata = this.state;
+    //     axios.post('http://narfo.retrotest.co.za/Member/set', userdata)
+    //         .then(res => {
+    //             console.log(res.data);
+    //         })
+    //     console.log(userdata)
+    // }
 
     handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
+        this.props.onMemberDetailsChange(event.target.value,name);
     };
 
     handleOnClick = () => {
@@ -62,21 +59,19 @@ class MemberApplication extends Component {
     }
 
     handleOptionChange = changeEvent => {
-        this.setState({
-            Gender: changeEvent.target.value
-        });
+        this.props.onMemberDetailsChange(changeEvent.target.value,'Gender');
     };
 
     render() {
         return (
             <div>
-                <h1>Membership Application</h1>
+                <h1>Membership Application {this.props.memDetails.FullName}</h1>
                 <h2>Membership Details</h2>
                 <form className='Register' onSubmit={this.handleSubmit} >
                     <TextField
                         id="outlined-name"
                         label="Full Name"
-                        value={this.state.FullName}
+                        value={this.props.memDetails.FullName}
                         onChange={this.handleChange('FullName')}
                         margin="normal"
                         variant="outlined"
@@ -85,7 +80,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Surname"
-                        value={this.state.Surname}
+                        value={this.props.memDetails.Surname}
                         onChange={this.handleChange('Surname')}
                         margin="normal"
                         variant="outlined"
@@ -93,7 +88,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="ID Number"
-                        value={this.state.IDNum}
+                        value={this.props.memDetails.IDNum}
                         onChange={this.handleChange('IDNum')}
                         margin="normal"
                         variant="outlined"
@@ -101,7 +96,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Cell"
-                        value={this.state.Cell}
+                        value={this.props.memDetails.Cell}
                         onChange={this.handleChange('Cell')}
                         margin="normal"
                         variant="outlined"
@@ -109,8 +104,8 @@ class MemberApplication extends Component {
                     <br/>
                     <TextField
                         id="outlined-name"
-                        label="Surname"
-                        value={this.state.Occupation}
+                        label="Occupation"
+                        value={this.props.memDetails.Occupation}
                         onChange={this.handleChange('Occupation')}
                         margin="normal"
                         variant="outlined"
@@ -125,32 +120,32 @@ class MemberApplication extends Component {
                         >
                         Ethnicity
                         </InputLabel>
-                            <Select
-                                native
-                                value={this.state.Ethnicity}
-                                onChange={this.handleChange('Ethnicity')}
-                                input={
-                                    <OutlinedInput
-                                        name="Ethnicity"
-                                        labelWidth={this.state.LabelWidth}
-                                        id="outlined-Ethnicity-native-simple"
-                                    />
-                                }
-                            >
-                                <option value="Ethnicity" />
-                                <option value={"Black"}>Black</option>
-                                <option value={"White"}>White</option>
-                                <option value={"Coloured"}>Coloured</option>
-                                <option value={"Indian"}>Indian</option>
-                                <option value={"Other"}>Other</option>
-                            </Select>
+                        <Select
+                            native
+                            value={this.props.memDetails.Ethnicity}
+                            onChange={this.handleChange('Ethnicity')}
+                            input={
+                                <OutlinedInput
+                                    name="Ethnicity"
+                                    // labelWidth={this.state.LabelWidth}
+                                    id="outlined-Ethnicity-native-simple"
+                                />
+                            }
+                        >
+                            <option value="Ethnicity" />
+                            <option value={"Black"}>Black</option>
+                            <option value={"White"}>White</option>
+                            <option value={"Coloured"}>Coloured</option>
+                            <option value={"Indian"}>Indian</option>
+                            <option value={"Other"}>Other</option>
+                        </Select>
                     </FormControl>
                     <br/>
                     Gender
                     <br/>
                     <Radio
                         id="radio-button-male"
-                        checked={this.state.Gender === "Male"}
+                        checked={this.props.memDetails.Gender === "Male"}
                         onChange={this.handleOptionChange}
                         value="Male"
                         name="radio-button-male"
@@ -159,7 +154,7 @@ class MemberApplication extends Component {
                     Male
                     <Radio 
                         id ="radio-button-female"
-                        checked={this.state.Gender === "Female"}
+                        checked={this.props.memDetails.Gender === "Female"}
                         onChange={this.handleOptionChange}
                         value="Female"
                         name="radio-button-female"
@@ -185,14 +180,14 @@ MemberApplication.propTypes = {
 const mapStateToProps = state => {
     return {
         currPage: state.currentPage,
-        memDetails: state.memberDetails
+        memDetails: state.signupDetails
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
-        onFullNameChange: (fn) => dispatch({type: 'UPDATE_FULLNAME', fullname:fn})
+        onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
     }
 }
   
