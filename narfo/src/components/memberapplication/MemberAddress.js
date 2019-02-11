@@ -4,8 +4,8 @@ import Fab from "@material-ui/core/Fab";
 import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
-
-export default class MemberRes extends Component {
+import { connect } from 'react-redux';
+class MemberAddress extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,16 +17,6 @@ export default class MemberRes extends Component {
     };
   }
 
-  handleInputChange = event => {
-    event.preventDefault();
-    console.log(event);
-    console.log(event.target.name);
-    console.log(event.target.value);
-
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -35,18 +25,11 @@ export default class MemberRes extends Component {
   };
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    this.props.onMemberDetailsChange(event.target.value,name);
   };
 
   render() {
-    const { ResidentialAd } = this.state;
-    const { City } = this.state;
-    const { Province } = this.state;
-    const { Country } = this.state;
-    const { PostalCode } = this.state;
-
+  
     return (
       <div>
         <h1>Membership Application</h1>
@@ -55,8 +38,8 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Address"
             label="Address"
-            value={this.state.ResidentialAd}
-            onChange={this.handleChange("Residence")}
+            value={this.props.memDetails.ResidentialAd}
+            onChange={this.handleChange("ResidentialAd")}
             margin="normal"
             variant="outlined"
           />{" "}
@@ -64,7 +47,7 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-City"
             label="City"
-            value={this.state.City}
+            value={this.props.memDetails.City}
             onChange={this.handleChange("City")}
             margin="normal"
             variant="outlined"
@@ -73,7 +56,7 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Province"
             label="Province"
-            value={this.state.Province}
+            value={this.props.memDetails.Province}
             onChange={this.handleChange("Province")}
             margin="normal"
             variant="outlined"
@@ -82,7 +65,7 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Country"
             label="Country"
-            value={this.state.Country}
+            value={this.props.memDetails.Country}
             onChange={this.handleChange("Country")}
             margin="normal"
             variant="outlined"
@@ -91,7 +74,7 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-PostalCode"
             label="Postal Code"
-            value={this.state.PostalCode}
+            value={this.props.memDetails.PostalCode}
             onChange={this.handleChange("PostalCode")}
             margin="normal"
             variant="outlined"
@@ -112,3 +95,18 @@ export default class MemberRes extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+      currPage: state.currentPage,
+      memDetails: state.signupDetails
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
+      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemberAddress);

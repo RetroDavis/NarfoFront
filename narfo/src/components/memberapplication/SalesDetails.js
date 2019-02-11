@@ -9,9 +9,9 @@ import Fab from '@material-ui/core/Fab';
 import NavigateNext from '@material-ui/icons/NavigateNext';
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
-
-export default class MemberPage5 extends Component {
+class SalesDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ export default class MemberPage5 extends Component {
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    this.props.onMemberDetailsChange(event.target.value,name);;
   };
 
   handleInputChange = event => {
@@ -86,7 +86,7 @@ export default class MemberPage5 extends Component {
             </InputLabel>
             <Select
               native
-              value={this.state.Sales_Representitive}
+              value={this.props.memDetails.Sales_Representitive}
               onChange={this.handleChange("Sales_Representitive")}
               input={
                 <OutlinedInput
@@ -96,9 +96,11 @@ export default class MemberPage5 extends Component {
                 />
               }
             >
-               {this.state.CallResult.map((name, index) => (
-                <option value={name.name}>{name.name}</option>
-              ))}
+                             <option value={"Gauteng"}>Gauteng</option>
+              <option value={"Limpopo"}>Limpopo</option>
+              <option value={"CapeTown"}>CapeTown</option>
+              <option value={"durbs"}>durbs</option>
+              <option value={"EP"}>EP</option>
             </Select>
           </FormControl>
           <br />
@@ -114,7 +116,7 @@ export default class MemberPage5 extends Component {
             </InputLabel>
             <Select
               native
-              value={this.state.Store}
+              value={this.props.memDetails.Store}
               onChange={this.handleChange("Store")}
               input={
                 <OutlinedInput
@@ -137,16 +139,16 @@ export default class MemberPage5 extends Component {
             Are you affiliated with another association
             <br />
             <Radio
-              checked={this.state.CurrentMember_Associaton === "Yes"}
-              onChange={this.handleOptionChange}
+              checked={this.props.memDetails.CurrentMember_Associaton === "Yes"}
+              onChange={this.handleChange('CurrentMember_Associaton')}
               value="Yes"
               name="radio-button-demo"
               aria-label="Yes"
             />
             Yes
             <Radio
-              checked={this.state.CurrentMember_Associaton === "No"}
-              onChange={this.handleOptionChange}
+              checked={this.props.memDetails.CurrentMember_Associaton === "No"}
+              onChange={this.handleChange('CurrentMember_Associaton')}
               value="No"
               name="radio-button-demo"
               aria-label="No"
@@ -157,7 +159,7 @@ export default class MemberPage5 extends Component {
           <label>
             I Hereby Accept the electronic communication policy:
             <Checkbox
-              checked={this.state.communication_Policy}
+              checked={this.props.memDetails.communication_Policy}
               onChange={this.handleChange("communication_Policy")}
               value="communication_Policy"
             />
@@ -178,3 +180,18 @@ export default class MemberPage5 extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+      currPage: state.currentPage,
+      memDetails: state.signupDetails
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
+      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SalesDetails);
