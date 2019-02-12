@@ -22,9 +22,9 @@ import ActivitiesFilterBar from './ActivitiesFilterBar';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(description, activityType, firearmType, discipline, date, status) {
   counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+  return { id: counter, description, activityType, firearmType, discipline, date, status };
 }
 
 function desc(a, b, orderBy) {
@@ -57,7 +57,7 @@ const rows = [
   { id: 'firearmType', numeric: true, disablePadding: false, label: 'Firearm Type' },
   { id: 'discipline', numeric: true, disablePadding: false, label: 'Discipline' },
   { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
-  { id: 'status', numeric: true, disablePadding: false, label: 'Status' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
 ];
 
 class ActivitiesTableHead extends React.Component {
@@ -82,7 +82,7 @@ class ActivitiesTableHead extends React.Component {
             row => (
               <TableCell
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
+                align='center'
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
@@ -166,11 +166,6 @@ let ActivitiesTableHeadToolbar = props => {
       <div className={classes.spacer} />
       <ActivitiesFilterBar/>
       <div className={classes.spacer} />
-      <Tooltip title="Add Activity">
-        <IconButton aria-label="Add Activity">
-          <AddCircleOutlineIcon />
-        </IconButton>
-      </Tooltip>
       <div className={classes.actions}>
         {numSelected > 0 ? (
           <Tooltip title="Delete">
@@ -179,11 +174,18 @@ let ActivitiesTableHeadToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+          <div>
+            <Tooltip title="Add Activity">
+              <IconButton aria-label="Add Activity">
+                <AddCircleOutlineIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Filter list">
+              <IconButton aria-label="Filter list">
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         )}
       </div>
     </Toolbar>
@@ -216,19 +218,19 @@ class ActivitiesTable extends React.Component {
     orderBy: 'calories',
     selected: [],
     data: [
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Donut', 452, 25.0, 51, 4.9),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-      createData('Honeycomb', 408, 3.2, 87, 6.5),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Jelly Bean', 375, 0.0, 94, 0.0),
-      createData('KitKat', 518, 26.0, 65, 7.0),
-      createData('Lollipop', 392, 0.2, 98, 0.0),
-      createData('Marshmallow', 318, 0, 81, 2.0),
-      createData('Nougat', 360, 19.0, 9, 37.0),
-      createData('Oreo', 437, 18.0, 63, 4.0),
+      createData('Cupcake', 'Dedicated Sports Shooting Activity', 3.7, 67, 4.3, 'Approved'),
+      createData('Donut', 'Dedicated Hunter Activity', 25.0, 51, 4.9, 'UnApproved'),
+      createData('Eclair', 'Dedicated Sports Shooting Activity', 16.0, 24, 6.0, 'Approved'),
+      createData('Frozen yoghurt', 'Dedicated Hunter Activity', 6.0, 24, 4.0, 'Approved'),
+      createData('Gingerbread', 'Dedicated Sports Shooting Activity', 16.0, 49, 3.9, 'Approved'),
+      createData('Honeycomb', 'Dedicated Hunter Activity', 3.2, 87, 6.5, 'Approved'),
+      createData('Ice cream sandwich', 'Dedicated Hunter Activity', 9.0, 37, 4.3, 'Approved'),
+      createData('Jelly Bean', 'Dedicated Hunter Activity', 0.0, 94, 0.0, 'Approved'),
+      createData('KitKat', 'Dedicated Sports Shooting Activity', 26.0, 65, 7.0, 'UnApproved'),
+      createData('Lollipop', 'Dedicated Sports Shooting Activity', 0.2, 98, 0.0, 'Approved'),
+      createData('Marshmallow', 'Dedicated Sports Shooting Activity', 0, 81, 2.0, 'Approved'),
+      createData('Nougat', 'Dedicated Hunter Activity', 19.0, 9, 37.0, 'Approved'),
+      createData('Oreo', 'Dedicated Sports Shooting Activity', 18.0, 63, 4.0, 'Approved'),
     ],
     page: 0,
     rowsPerPage: 5,
@@ -321,12 +323,13 @@ class ActivitiesTable extends React.Component {
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
-                        {n.name}
+                        {n.description}
                       </TableCell>
-                      <TableCell align="right">{n.calories}</TableCell>
-                      <TableCell align="right">{n.fat}</TableCell>
-                      <TableCell align="right">{n.carbs}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
+                      <TableCell align="left">{n.activityType}</TableCell>
+                      <TableCell align="left">{n.firearmType}</TableCell>
+                      <TableCell align="left">{n.discipline}</TableCell>
+                      <TableCell align="left">{n.date}</TableCell>
+                      <TableCell align="left">{n.status}</TableCell>
                     </TableRow>
                   );
                 })}
