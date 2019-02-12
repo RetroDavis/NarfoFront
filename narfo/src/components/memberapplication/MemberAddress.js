@@ -5,9 +5,7 @@ import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
 
-import { connect } from 'react-redux';
-class MemberAddress extends Component {
-
+export default class MemberRes extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,10 +13,6 @@ class MemberAddress extends Component {
       City: "",
       Province: "",
       Country: "",
-<<<<<<< origin/lindaniValid
-
-      PostalCode: ""
-=======
       PostalCode: "",
       gotoNextPage: false,
 
@@ -28,13 +22,21 @@ class MemberAddress extends Component {
       ProvinceError: "",
       CountryError: "",
       PostalCodeError: ""
->>>>>>> local
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleInputChange = event => {
+    event.preventDefault();
+    console.log(event);
+    console.log(event.target.name);
+    console.log(event.target.value);
 
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
    //Clear errors everytime you render new input validation
    clearErroText = () =>{
@@ -102,7 +104,7 @@ checkForErrors = () =>{
           CityError: '',
           ProvinceError: '',
           CountryError: '',
-          PostalCodeError: '',
+          PostalCodeError: ''
         });
     } else{  
        console.log(err)
@@ -111,29 +113,34 @@ checkForErrors = () =>{
   };
 
   handleChange = name => event => {
-
-    this.props.onMemberDetailsChange(event.target.value,name);
+    this.setState({
+      [name]: event.target.value
+    });
   };
 
 
   submitValidResults = () => {
-    if(false) {
+    if(this.gotoNextPage) {
         return <Link to="/LoginDetails">
-                <Fab color="primary" aria-label="Add" type="Submit" onSubmit={this.handleSubmit}>
+                <Fab color="primary" aria-label="Add" type="Submit" >
                   <NavigateNext />
                 </Fab>
               </Link>
       }else{
           //Validate again 
-          return <Fab color="primary" aria-label="Add" type="Submit"  onSubmit={this.handleSubmit}>
+          return <Fab color="primary" aria-label="Add" type="Submit"  >
               <NavigateNext> </NavigateNext>
           </Fab>
       }          
   }
 
   render() {
-  
-d
+    const { ResidentialAd } = this.state;
+    const { City } = this.state;
+    const { Province } = this.state;
+    const { Country } = this.state;
+    const { PostalCode } = this.state;
+
     return (
       <div>
         <h1>Membership Application</h1>
@@ -142,16 +149,19 @@ d
           <TextField
             id="outlined-Address"
             label="Address"
-<<<<<<< origin/lindaniValid
-
-            value={this.props.memDetails.ResidentialAd}
-            onChange={this.handleChange("ResidentialAd")}
-
-=======
             value={this.state.ResidentialAd}
             onChange={this.handleChange("Residence")}
             helperText = {this.state.ResidentialAdError} //residential adrress error-text
->>>>>>> local
+            margin="normal"
+            variant="outlined"
+          />
+          <br />
+          <TextField
+            id="outlined-Address"
+            label="Address"
+            value={this.state.ResidentialAd}
+            onChange={this.handleChange("Address")} 
+            helperText ={this.state.ResidentialAdError} //address error-text
             margin="normal"
             variant="outlined"
           />
@@ -159,15 +169,9 @@ d
           <TextField
             id="outlined-City"
             label="City"
-<<<<<<< origin/lindaniValid
-            value={this.props.memDetails.City}
-            onChange={this.handleChange("City")}
-
-=======
             value={this.state.City}
             onChange={this.handleChange("City")} 
             helperText ={this.state.CityError} //City error-text
->>>>>>> local
             margin="normal"
             variant="outlined"
           />
@@ -175,13 +179,9 @@ d
           <TextField
             id="outlined-Province"
             label="Province"
-            value={this.props.memDetails.Province}
+            value={this.state.Province}
             onChange={this.handleChange("Province")}
-<<<<<<< origin/lindaniValid
-
-=======
             helperText = {this.state.ProvinceError} //province error-text
->>>>>>> local
             margin="normal"
             variant="outlined"
           />
@@ -189,7 +189,7 @@ d
           <TextField
             id="outlined-Country"
             label="Country"
-            value={this.props.memDetails.Country}
+            value={this.state.Country}
             onChange={this.handleChange("Country")}
             helperText = {this.state.CountryError} // Country error-text
             margin="normal"
@@ -199,13 +199,9 @@ d
           <TextField
             id="outlined-PostalCode"
             label="Postal Code"
-            value={this.props.memDetails.PostalCode}
+            value={this.state.PostalCode}
             onChange={this.handleChange("PostalCode")}
-<<<<<<< origin/lindaniValid
-
-=======
             helperText = {this.state.PostalCodeError}  //postal code error
->>>>>>> local
             margin="normal"
             variant="outlined"
           />
@@ -221,19 +217,3 @@ d
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-      currPage: state.currentPage,
-      memDetails: state.signupDetails
-  };
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
-      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MemberAddress);
-

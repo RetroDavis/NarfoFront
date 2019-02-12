@@ -6,10 +6,7 @@ import NavigateNext from '@material-ui/icons/NavigateNext';
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
 
-import { connect } from 'react-redux';
-
- class LoginDetails extends Component {
-
+export default class MemberUserName extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,16 +14,25 @@ import { connect } from 'react-redux';
       UserName: "",
       PassWord: "",
       PassWordConfirm: "",
+      Declaration: "",
+      Delaraction_Acceptance: false,
 
-
-      Delaraction_Acceptance: false
+      //Error labels
+      EmailError: "",
+      UserNameError: "",
+      PassWordError: "",
+      PassWordConfirmError: "",
+      DeclarationError: "",
+      Delaraction_AcceptanceError: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = name => event => {
-
-    this.props.onMemberDetailsChange(event.target.value,name);;
-
+    this.setState({
+      [name]: event.target.value
+    });
   };
 
   handleInputChange = event => {
@@ -40,20 +46,118 @@ import { connect } from 'react-redux';
     });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const userData = this.state;
-    console.log(userData);
-  };
+  //Clear errors everytime you render new input validation
+  clearErroText = () =>{
+    this.setState({
+        Email: "",
+        UserName: "",
+        PassWord: "",
+        PassWordConfirm: "",
+        Declaration: "",
+        Delaraction_Acceptance: false,
+        helperText: '' 
+    });
+}
+
+checkForErrors = () =>{
+  this.gotoNextPage=false;
+  this.clearErroText();
+  let isError = false;
+  const errors = {};
+  
+  if(this.state.Email.length < 5){
+      isError = true;
+      errors.EmailError = "invalid email. correct email required"
+  }
+  
+  if(this.state.UserName.length < 3){
+      isError = true;
+      errors.UserNameError = "invalid username, should be atleast 3 characters"    
+  }
+
+  if(this.state.PassWord.length < 6){
+    isError = true;
+    errors.PassWordError = "invalid input, should be atleast 6 characters"    
+}
 
 
- 
-  handleOption = name => event => {
-    this.props.onMemberDetailsChange(event.target.checked,name);;
+if(this.state.PassWordConfirm.length < 6){
+  isError = (this.PassWord!==this.PassWordConfirm)? true:false
+  errors.PassWordConfirmError = "invalid input, password does not match"    
+}
+  
+  if(this.state.Declaration===""){
+      isError = true;
+      errors.DeclarationError = "declaration required"    
+  }
+
+  if(this.state.Delaraction_Acceptance=== ""){
+      isError = true;
+      errors.Delaraction_AcceptanceError = "acceptance required"    
+  }
+
+  if(isError){
+      this.setState({
+          ...this.setState,
+          ...errors
+      });
+  }
+  return isError;
+}
+
+
+handleSubmit = event => {
+  event.preventDefault();
+  const userData = this.state;
+  console.log(userData);
+  const err = this.checkForErrors();
+  this.gotoNextPage = err;
+  console.log(err)
+  if(err){
+      //clear form
+      this.setState({
+        Email: "",
+      UserName: "",
+      PassWord: "",
+      PassWordConfirm: "",
+      Declaration: "",
+      Delaraction_Acceptance: false
+      });
+  } else{  
+     console.log(err)
+      this.handleChange()
+  }
+};
+
+  handleOption = ChangeEvent => {
+    this.setState({
+      Delaraction_Acceptance: ChangeEvent.target.value
+    });
   };
+
+  submitValidResults = () => {
+    if(false) {
+        return  <Link to="/Declaration">
+                  <Fab color="primary" aria-label="Add" type="Submit">
+                    <NavigateNext />
+                  </Fab>
+                </Link>
+      }else{
+          //Validate again 
+          return <Fab color="primary" aria-label="Add" type="Submit"  >
+              <NavigateNext> </NavigateNext>
+          </Fab>
+      }          
+  }
+
 
   render() {
-
+    const { Email } = this.state;
+    const { UserName } = this.state;
+    const { PassWord } = this.state;
+    const { PassWordConfirm } = this.state;
+    const { Declaration } = this.state;
+    const { Delaraction_Acceptance } = this.state;
 
     return (
       <div>
@@ -63,9 +167,9 @@ import { connect } from 'react-redux';
           <TextField
             id="outlined-Email"
             label="Email"
-
-            value={this.props.memDetails.Email}
-            onChange={this.handleChange("Email")}
+            value={this.state.Email}
+            onChange={this.handleChange("Residence")}
+            helperText = {this.state.EmailError} //email text error
             margin="normal"
             variant="outlined"
           />{" "}
@@ -73,8 +177,9 @@ import { connect } from 'react-redux';
           <TextField
             id="outlined-UserName"
             label="UserName"
-            value={this.props.memDetails.UserName}
+            value={this.state.UserName}
             onChange={this.handleChange("UserName")}
+            helperText = {this.state.UserNameError} //username text required
             margin="normal"
             variant="outlined"
           />{" "}
@@ -82,8 +187,9 @@ import { connect } from 'react-redux';
           <TextField
             id="outlined-PassWord"
             label="PassWord"
-            value={this.props.memDetails.PassWord}
+            value={this.state.PassWord}
             onChange={this.handleChange("PassWord")}
+            helperText = {this.state.UserNameError} //email text
             margin="normal"
             variant="outlined"
           />{" "}
@@ -91,8 +197,9 @@ import { connect } from 'react-redux';
           <TextField
             id="outlined-PassWordConfirm"
             label="PassWordConfirm"
-            value={this.props.memDetails.PassWordConfirm}
+            value={this.state.PassWordConfirm}
             onChange={this.handleChange("PassWordConfirm")}
+            helperText = {this.state.PassWordConfirmError} //password confirmation error text
             margin="normal"
             variant="outlined"
           />{" "}
@@ -110,41 +217,22 @@ import { connect } from 'react-redux';
           <label>
             I Accept:
             <Checkbox
-                    checked={this.props.memDetails.Delaraction_Acceptance}
-                    onChange={this.handleOption('Delaraction_Acceptance')}
-                    value="Delaraction_Acceptance"
-                />
-
-          </label><br/>
+              checked={this.state.Delaraction_Acceptance}
+              onChange={this.handleChange("Declaration_acceptance")}
+              value="Declaration"
+              //helperText = {this.state.DeclarationError} //email text
+            />
+          </label>
+          {this.state.DeclarationError}
+          <br/>
           <Link to="/MemberAddress">
             <Fab color="primary" aria-label="Add" type="Submit">
               <ArrowBack />
             </Fab>
           </Link>
-          <Link to="/Declaration">
-            <Fab color="primary" aria-label="Add" type="Submit">
-              <NavigateNext />
-            </Fab>
-          </Link>
+          {this.submitValidResults()}
         </form>
       </div>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-      currPage: state.currentPage,
-      memDetails: state.signupDetails
-  };
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
-      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginDetails);
-

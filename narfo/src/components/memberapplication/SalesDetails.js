@@ -5,14 +5,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Checkbox from "@material-ui/core/Checkbox";
 import Radio from "@material-ui/core/Radio";
-
-import Fab from "@material-ui/core/Fab";
-import NavigateNext from "@material-ui/icons/NavigateNext";
-import ArrowBack from "@material-ui/icons/NavigateBefore";
+import Fab from '@material-ui/core/Fab';
+import NavigateNext from '@material-ui/icons/NavigateNext';
+import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
-class SalesDetails extends Component {
+export default class MemberPage5 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,47 +18,117 @@ class SalesDetails extends Component {
       Sales_Representitive: "",
       Sales_list: "",
       Store: "",
-      Store_list: [],
+      Store_list: "",
       CurrentMember_Associaton: false,
       communication_Policy: false,
       labelWidth: 0,
-      isLoaded: false,
-      CallResult: []
+      gotoNextPage: false,
+
+      //Clear Error text
+      Accept_Electronic_CommsError: '',
+      Sales_RepresentitiveError: "",
+      Sales_listError: "",
+      StoreError: "",
+      Store_listError: "",
+      CurrentMember_AssociatonError: false,
+      communication_PolicyError: false,
+      labelWidthError: 0
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleOptionChange = event => {
     this.setState({ CurrentMember_Associaton: event.target.value });
   };
 
-  handleChange = name => event => {
-    this.props.onMemberDetailsChange(event.target.value, name);
-  };
+    //Clear errors everytime you render new input validation
+    clearErroText = () =>{
+      this.setState({
+        Accept_Electronic_CommsError: '',
+        Sales_RepresentitiveError: "",
+        Sales_listError: "",
+        StoreError: "",
+        Store_listError: "",
+        CurrentMember_AssociatonError: false,
+        communication_PolicyError: false,
+        labelWidthError: 0,
+         helperText: ''
+      });
+  }
 
-  handlePolicyOption = name => event => {
-    this.props.onMemberDetailsChange(event.target.checked, name);
-  };
+  checkForErrors = () =>{
+    this.gotoNextPage=false;
+    this.clearErroText();
+    let isError = false;
+    const errors = {};
 
-  componentDidMount(){
-    fetch('https://localhost:44327/api/salesReps/get/all/sales')
-    .then(res => res.json())
-    .then(json => {
-    this.setState({
-    isLoaded: true,
-    CallResult: json.members
-    })
-    });
-    
-    fetch('https://localhost:44327/api/Branches')
-    .then(res => res.json())
-    .then(json => {
-    this.setState({
-    isLoaded: true,
-    Store_list: json.branchName
-    })
-    });
-    
+    if(this.state.Sales_Representitive=== ""){
+        isError = true;
+        errors.Sales_RepresentitiveError = "invalid option selection"    
     }
+
+    if(this.state.Store=== ""){
+      isError = true;
+      errors.StoreError = "invalid option selection"    
+    }
+
+    if(this.state.CurrentMember_Associaton=== ""){
+      isError = true;
+      errors.CurrentMember_AssociatonError = "invalid option selection"    
+  }
+
+  if(this.state.Accept_Electronic_Comms=== ""){
+    isError = true;
+    errors.Accept_Electronic_CommsError = "invalid option selection"  
+  }
+
+  
+  if(this.state.Accept_Electronic_Comms=== ""){
+    isError = true;
+    errors.Accept_Electronic_CommsError = "invalid option selection"  
+  }
+  
+    if(isError){
+        this.setState({
+            ...this.setState,
+            ...errors
+        });
+    }
+    
+    return isError;
+}
+
+handleSubmit = (event) => {
+  event.preventDefault()
+  const userdata = this.state;
+  const err = this.checkForErrors();
+  this.state.gotoNextPage = err;
+  console.log(userdata)
+  console.log(err)
+  if(err){
+      //clear form
+      this.setState({
+        Accept_Electronic_Comms: false,
+        Sales_Representitive: "",
+        Sales_list: "",
+        Store: "",
+        Store_list: "",
+        CurrentMember_Associaton: false,
+        communication_Policy: false,
+        labelWidth: 0
+        
+      });
+  } else{
+      console.log(userdata)
+      this.handleChange()
+  }
+}
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
 
   handleInputChange = event => {
     event.preventDefault();
@@ -68,16 +136,27 @@ class SalesDetails extends Component {
       [event.target.name]: event.target.value
     });
   };
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log(this.state.CallResult);
-  };
+
+  submitValidResults = () => {
+    if(this.state.gotoNextPage) {
+        return <Link to="/MemberDone">
+             <Fab color="primary" aria-label="Add" type="Submit">
+                 <NavigateNext/>> 
+             </Fab>
+         </Link>;
+      }else{
+          //Validate again 
+          this.gotoNextPage = false
+          return <Fab color="primary" aria-label="Add" type="Submit">
+              <NavigateNext> </NavigateNext>
+          </Fab>
+      }          
+  }
 
   render() {
-    let { isLoaded, items } = this.state;
     const { Accept_Electronic_Comms } = this.state;
     const { Sales_Representitive } = this.state;
-    const Sales_list = ["hello", "goodbye"];
+    const { Sales_list } = ["hello", "goodbye"];
     const { Store } = this.state;
     const { CurrentMember_Associaton } = this.state;
 
@@ -87,10 +166,9 @@ class SalesDetails extends Component {
     // );
     return (
       <div>
-        <h1>Membership Application</h1>
-        <h2>Sales decleration</h2>
-        <br />
-        <form onSubmit={this.handleSubmit}>
+         <h1>Membership Application</h1>
+        <h2>Sales decleration</h2><br/>
+        <form onSubmit={this.handelSubmit}>
           <FormControl variant="outlined">
             <InputLabel
               ref={ref => {
@@ -102,7 +180,7 @@ class SalesDetails extends Component {
             </InputLabel>
             <Select
               native
-              value={this.props.memDetails.Sales_Representitive}
+              value={this.state.Sales_Representitive}
               onChange={this.handleChange("Sales_Representitive")}
               input={
                 <OutlinedInput
@@ -112,12 +190,16 @@ class SalesDetails extends Component {
                 />
               }
             >
-              {this.state.CallResult.map((name, index) => (
-                <option value={name.firstname}>{name.firstname}</option>
-              ))}
+              <option value="Sales" />
+              <option value={"cello"}>cello</option>
+              <option value={"Ntumi"}>Ntumi</option>
+              <option value={"Micky"}>Micky</option>
+              <option value={"MVP"}>MVP</option>
+              <option value={"Thandi"}>Thandi</option>
             </Select>
           </FormControl>
           <br />
+          {this.state.Sales_RepresentitiveError}
           <br />
           <FormControl variant="outlined">
             <InputLabel
@@ -130,7 +212,7 @@ class SalesDetails extends Component {
             </InputLabel>
             <Select
               native
-              value={this.props.memDetails.Store}
+              value={this.state.Store}
               onChange={this.handleChange("Store")}
               input={
                 <OutlinedInput
@@ -140,80 +222,60 @@ class SalesDetails extends Component {
                 />
               }
             >
-              {this.state.Store_list.map((name, index) => (
-                <option value={name.branch1}>{name.branch1}</option>
-              ))}
+              <option value="Store" />
+              <option value={"Gauteng"}>Gauteng</option>
+              <option value={"Limpopo"}>Limpopo</option>
+              <option value={"CapeTown"}>CapeTown</option>
+              <option value={"durbs"}>durbs</option>
+              <option value={"EP"}>EP</option>
             </Select>
           </FormControl>{" "}
           <br />
+          {this.state.StoreError}
+          <br/>
           <label>
             Are you affiliated with another association
             <br />
             <Radio
-              checked={this.props.memDetails.CurrentMember_Associaton === "Yes"}
-              onChange={this.handleChange("CurrentMember_Associaton")}
+              checked={this.state.CurrentMember_Associaton === "Yes"}
+              onChange={this.handleOptionChange}
               value="Yes"
               name="radio-button-demo"
               aria-label="Yes"
             />
-            Yes
+            Male
             <Radio
-              checked={this.props.memDetails.CurrentMember_Associaton === "No"}
-              onChange={this.handleChange("CurrentMember_Associaton")}
+              checked={this.state.CurrentMember_Associaton === "No"}
+              onChange={this.handleOptionChange}
               value="No"
               name="radio-button-demo"
               aria-label="No"
             />
-            No
+            Female
           </label>
           <br />
+          {this.state.CurrentMember_AssociatonError}
+          <br/>
           <label>
             I Hereby Accept the electronic communication policy:
+            <br/>
             <Checkbox
-              checked={this.props.memDetails.communication_Policy}
-              onChange={this.handlePolicyOption("communication_Policy")}
-              value="communication_Policy"
+              checked={this.state.communication_Policy}
+              onChange={this.handleChange("communication_policy")}
+              value="Yes"
             />
           </label>
-          <br />
+          <br/>
+          {this.state.Accept_Electronic_CommsError}
+          <br/>
           <Link to="/Declaration">
             <Fab color="primary" aria-label="Add" type="Submit">
               <ArrowBack />
             </Fab>
           </Link>
-          <Link to="/MemberDone">
-            <Fab color="primary" aria-label="Add" type="Submit">
-              <NavigateNext />
-            </Fab>
-          </Link>
+          {this.submitValidResults()}
         </form>
       </div>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    currPage: state.currentPage,
-    memDetails: state.signupDetails
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onPageChange: pageName =>
-      dispatch({ type: "UPDATE_CURRENT_PAGE", currPage: pageName }),
-    onMemberDetailsChange: (value, vname) =>
-      dispatch({
-        type: "UPDATE_MEMBER_DETAILS",
-        varValue: value,
-        varName: vname
-      })
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SalesDetails);
-

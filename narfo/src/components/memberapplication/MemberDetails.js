@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -24,34 +23,6 @@ const styles = theme => ({
         fontWeight : 410,
       },
   });
-<<<<<<< origin/lindaniValid
-
-class MemberApplication extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         FullName: '',
-    //         Surname: '',
-    //         IDNum: '',
-    //         Cell: '',
-    //         Occupation: '',
-    //         Ethnicity: '',
-    //         Gender: '',
-    //         LabelWidth: 0
-    //     }
-    // }
-
-    // handleSubmit = (event) => {
-    //     event.preventDefault()
-    //     const userdata = this.state;
-    //axios.post('https://localhost:44327/Member/set', userdata)
-    //         .then(res => {
-    //             console.log(res.data);
-    //         })
-    //     console.log(userdata)
-    // }
-
-=======
   
   class MemberApplication extends Component {
       
@@ -83,22 +54,16 @@ class MemberApplication extends Component {
     }
     
     
->>>>>>> local
     handleChange = name => event => {
-        this.props.onMemberDetailsChange(event.target.value,name);
+        this.setState({
+            [name]: event.target.value,
+        });
     };
-<<<<<<< origin/lindaniValid
-
-    handleOnClick = () => {
-        this.props.onPageChange("/MembershipDetails")
-    }
-
-=======
     
->>>>>>> local
     handleOptionChange = changeEvent => {
-        this.props.onMemberDetailsChange(changeEvent.target.value,'Gender');
-
+        this.setState({
+            Gender: changeEvent.target.value
+        });
     };
     
      //Clear errors everytime you render new input validation
@@ -208,22 +173,16 @@ class MemberApplication extends Component {
     }
 
     render() {
-<<<<<<< origin/lindaniValid
-        return (
-            <div>
-                <h1>Membership Application {this.props.memDetails.FullName}</h1>
-=======
             return (
                 <div>
                 <h1>Membership Application</h1>
->>>>>>> local
                 <h2>Membership Details</h2>
                 <form className='Register' onSubmit={this.handleSubmit}>
                     
                      <TextField
                         id="outlined-name"
                         label="Full Name"
-                        value={this.props.memDetails.FullName}
+                        value={this.state.FullName}
                         onChange={this.handleChange('FullName')}
                         helperText = {this.state.FullNameError} //invalid fullname error text
                         margin="normal"
@@ -233,7 +192,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Surname"
-                        value={this.props.memDetails.Surname}
+                        value={this.state.Surname}
                         onChange={this.handleChange('Surname')}
                         helperText = {this.state.SurnameError} //invalid surname  error text
                         margin="normal"
@@ -242,7 +201,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="ID Number"
-                        value={this.props.memDetails.IDNum}
+                        value={this.state.IDNum}
                         onChange={this.handleChange('IDNum')}
                         helperText = {this.state.IDNumError} // invalid IDNo text error
                         margin="normal"
@@ -251,7 +210,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Cell"
-                        value={this.props.memDetails.Cell}
+                        value={this.state.Cell}
                         onChange={this.handleChange('Cell')}
                         helperText = {this.state.CellError} //invalid cellphone number text error
                         margin="normal"
@@ -261,11 +220,7 @@ class MemberApplication extends Component {
                     <TextField
                         id="outlined-name"
                         label="Occupation"
-<<<<<<< origin/lindaniValid
-                        value={this.props.memDetails.Occupation}
-=======
                         value={this.state.Occupation}
->>>>>>> local
                         onChange={this.handleChange('Occupation')}
                         helperText = {this.state.OccupationError} //Invalid occupation text error
                         margin="normal"
@@ -282,27 +237,6 @@ class MemberApplication extends Component {
                         >
                         Ethnicity
                         </InputLabel>
-<<<<<<< origin/lindaniValid
-                        <Select
-                            native
-                            value={this.props.memDetails.Ethnicity}
-                            onChange={this.handleChange('Ethnicity')}
-                            input={
-                                <OutlinedInput
-                                    name="Ethnicity"
-                                     labelWidth= {0}
-                                    id="outlined-Ethnicity-native-simple"
-                                />
-                            }
-                        >
-                            <option value="Ethnicity" />
-                            <option value={"Black"}>Black</option>
-                            <option value={"White"}>White</option>
-                            <option value={"Coloured"}>Coloured</option>
-                            <option value={"Indian"}>Indian</option>
-                            <option value={"Other"}>Other</option>
-                        </Select>
-=======
                             <Select
                                 native
                                 value={this.state.Ethnicity}
@@ -322,7 +256,6 @@ class MemberApplication extends Component {
                                 <option value={"Indian"}>Indian</option>
                                 <option value={"Other"}>Other</option>
                             </Select>
->>>>>>> local
                     </FormControl>
                     <br/>
                     {this.state.EthnicityError} 
@@ -330,13 +263,8 @@ class MemberApplication extends Component {
                     Gender
                     <br/>
                     <Radio
-<<<<<<< origin/lindaniValid
-                        id="radio-button-male"
-                        checked={this.props.memDetails.Gender === "Male"}
-=======
                         id="radio-button-male" 
                         checked={this.state.Gender === "Male"}
->>>>>>> local
                         onChange={this.handleOptionChange}
                         value="Male"
                         name="radio-button-male"
@@ -345,7 +273,7 @@ class MemberApplication extends Component {
                     Male
                     <Radio 
                         id ="radio-button-female"
-                        checked={this.props.memDetails.Gender === "Female"}
+                        checked={this.state.Gender === "Female"}
                         onChange={this.handleOptionChange}
                         value="Female"
                         name="radio-button-female"
@@ -355,17 +283,8 @@ class MemberApplication extends Component {
                     <br/>
                     {this.state.GenderError} 
                     <br />
-<<<<<<< origin/lindaniValid
-                    <Link  to="/MemberAddress">
-                        <Fab color="primary" aria-label="Add" type="Submit" onClick={this.handleOnClick}>
-                            <NavigateNext></NavigateNext>
-                        </Fab>  
-                    </Link>
-                </form>
-=======
                     {this.submitValidResults()}
                     </form> 
->>>>>>> local
             </div>
         )
     }
@@ -374,22 +293,5 @@ class MemberApplication extends Component {
 MemberApplication.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-const mapStateToProps = state => {
-    return {
-        currPage: state.currentPage,
-        memDetails: state.signupDetails
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
-        onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
-    }
-}
   
-<<<<<<< origin/lindaniValid
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MemberApplication));
-=======
 export default withStyles(styles)(MemberApplication);
->>>>>>> local
