@@ -25,7 +25,6 @@ const styles = theme => ({
   });
 
 class MemberApplication extends Component {
-   
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -60,6 +59,7 @@ class MemberApplication extends Component {
 
     handleOptionChange = changeEvent => {
         this.props.onMemberDetailsChange(changeEvent.target.value,'Gender');
+
     };
 
     render() {
@@ -176,7 +176,6 @@ class MemberApplication extends Component {
 MemberApplication.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-
 const mapStateToProps = state => {
     return {
         currPage: state.currentPage,

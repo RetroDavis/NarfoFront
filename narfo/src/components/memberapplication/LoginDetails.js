@@ -5,9 +5,11 @@ import Fab from '@material-ui/core/Fab';
 import NavigateNext from '@material-ui/icons/NavigateNext';
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
+
 import { connect } from 'react-redux';
 
  class LoginDetails extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,12 +17,16 @@ import { connect } from 'react-redux';
       UserName: "",
       PassWord: "",
       PassWordConfirm: "",
+
+
       Delaraction_Acceptance: false
     };
   }
 
   handleChange = name => event => {
+
     this.props.onMemberDetailsChange(event.target.value,name);;
+
   };
 
   handleInputChange = event => {
@@ -40,12 +46,14 @@ import { connect } from 'react-redux';
     console.log(userData);
   };
 
+
  
   handleOption = name => event => {
     this.props.onMemberDetailsChange(event.target.checked,name);;
   };
 
   render() {
+
 
     return (
       <div>
@@ -55,6 +63,7 @@ import { connect } from 'react-redux';
           <TextField
             id="outlined-Email"
             label="Email"
+
             value={this.props.memDetails.Email}
             onChange={this.handleChange("Email")}
             margin="normal"
@@ -105,6 +114,7 @@ import { connect } from 'react-redux';
                     onChange={this.handleOption('Delaraction_Acceptance')}
                     value="Delaraction_Acceptance"
                 />
+
           </label><br/>
           <Link to="/MemberAddress">
             <Fab color="primary" aria-label="Add" type="Submit">
@@ -121,6 +131,7 @@ import { connect } from 'react-redux';
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
       currPage: state.currentPage,
@@ -136,3 +147,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginDetails);
+

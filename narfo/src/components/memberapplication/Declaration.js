@@ -6,9 +6,11 @@ import Fab from '@material-ui/core/Fab';
 import NavigateNext from '@material-ui/icons/NavigateNext';
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
+
 import { connect } from 'react-redux';
 
  class Declaration extends Component {
+
     constructor(props){
         super(props);   
         this.state = {
@@ -28,6 +30,7 @@ import { connect } from 'react-redux';
        }
 
     handleFCAOptionChange = changeEvent => {
+
         this.props.onMemberDetailsChange(changeEvent.target.value,'FCA');
       };
 
@@ -41,26 +44,33 @@ import { connect } from 'react-redux';
 
     handleChange = name => event => {
         this.props.onMemberDetailsChange(event.target.checked,name);;
+
       };
 
     render() {
     return (
       <div>
         <h1>Membership Application</h1>
+
         <h2>Declaration</h2>
+
         <form onSubmit={this.handleSubmit}>
             <label>
                 Are you well acquainted with the current 
                 Firearms Control Act<br/>
                 <Radio
+
                     checked={this.props.memDetails.FCA === "Yes"}
+
                     onChange={this.handleFCAOptionChange}
                     value="Yes"
                     name="radio-button-demo"
                     aria-label="Yes"
                 />Yes 
                 <Radio
+
                     checked={this.props.memDetails.FCA === "No"}
+
                     onChange={this.handleFCAOptionChange}
                     value="No"
                     name="radio-button-demo"
@@ -71,7 +81,9 @@ import { connect } from 'react-redux';
                 Are you well acquainted with the use and storage of your 
                 Firearm<br/> 
                 <Radio
+
                     checked={this.props.memDetails.Storage === "Yes"}
+
                     onChange={this.handleStorageOptionChange}
                     value="Yes"
                     name="radio-button-demo"
@@ -79,7 +91,9 @@ import { connect } from 'react-redux';
                 />
                 Yes
                 <Radio
+
                     checked={this.props.memDetails.Storage === "No"}
+
                     onChange={this.handleStorageOptionChange}
                     value="No"
                     name="radio-button-demo"
@@ -91,7 +105,9 @@ import { connect } from 'react-redux';
                 Have you ever been found guilty of any firearm related 
                 offence where your finger prints taken<br/>
                 <Radio
+
                     checked={this.props.memDetails.Guilty === "Yes"}
+
                     onChange={this.handleGuiltyOptionChange}
                     value="Yes"
                     name="radio-button-demo"
@@ -99,7 +115,9 @@ import { connect } from 'react-redux';
                 />
                 Yes
                 <Radio
+
                     checked={this.props.memDetails.Guilty === "No"}
+
                     onChange={this.handleGuiltyOptionChange}
                     value="No"
                     name="radio-button-demo"
@@ -163,6 +181,7 @@ import { connect } from 'react-redux';
     )
   }
 }
+
 const mapStateToProps = state => {
     return {
         currPage: state.currentPage,
@@ -178,3 +197,4 @@ const mapStateToProps = state => {
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(Declaration);
+

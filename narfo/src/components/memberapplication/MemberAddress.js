@@ -4,8 +4,10 @@ import Fab from "@material-ui/core/Fab";
 import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
+
 import { connect } from 'react-redux';
 class MemberAddress extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,9 +15,11 @@ class MemberAddress extends Component {
       City: "",
       Province: "",
       Country: "",
+
       PostalCode: ""
     };
   }
+
 
 
   handleSubmit = event => {
@@ -25,11 +29,13 @@ class MemberAddress extends Component {
   };
 
   handleChange = name => event => {
+
     this.props.onMemberDetailsChange(event.target.value,name);
   };
 
   render() {
   
+d
     return (
       <div>
         <h1>Membership Application</h1>
@@ -38,8 +44,10 @@ class MemberAddress extends Component {
           <TextField
             id="outlined-Address"
             label="Address"
+
             value={this.props.memDetails.ResidentialAd}
             onChange={this.handleChange("ResidentialAd")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -49,6 +57,7 @@ class MemberAddress extends Component {
             label="City"
             value={this.props.memDetails.City}
             onChange={this.handleChange("City")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -58,6 +67,7 @@ class MemberAddress extends Component {
             label="Province"
             value={this.props.memDetails.Province}
             onChange={this.handleChange("Province")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -76,6 +86,7 @@ class MemberAddress extends Component {
             label="Postal Code"
             value={this.props.memDetails.PostalCode}
             onChange={this.handleChange("PostalCode")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -110,3 +121,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberAddress);
+
