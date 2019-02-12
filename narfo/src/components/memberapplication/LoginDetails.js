@@ -6,7 +6,10 @@ import NavigateNext from '@material-ui/icons/NavigateNext';
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
 
-export default class MemberUserName extends Component {
+import { connect } from 'react-redux';
+
+ class LoginDetails extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,15 +17,16 @@ export default class MemberUserName extends Component {
       UserName: "",
       PassWord: "",
       PassWordConfirm: "",
-      Declaration: "",
+
+
       Delaraction_Acceptance: false
     };
   }
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+
+    this.props.onMemberDetailsChange(event.target.value,name);;
+
   };
 
   handleInputChange = event => {
@@ -42,19 +46,14 @@ export default class MemberUserName extends Component {
     console.log(userData);
   };
 
-  handleOption = ChangeEvent => {
-    this.setState({
-      Delaraction_Acceptance: ChangeEvent.target.value
-    });
+
+ 
+  handleOption = name => event => {
+    this.props.onMemberDetailsChange(event.target.checked,name);;
   };
 
   render() {
-    const { Email } = this.state;
-    const { UserName } = this.state;
-    const { PassWord } = this.state;
-    const { PassWordConfirm } = this.state;
-    const { Declaration } = this.state;
-    const { Delaraction_Acceptance } = this.state;
+
 
     return (
       <div>
@@ -64,8 +63,9 @@ export default class MemberUserName extends Component {
           <TextField
             id="outlined-Email"
             label="Email"
-            value={this.state.Email}
-            onChange={this.handleChange("Residence")}
+
+            value={this.props.memDetails.Email}
+            onChange={this.handleChange("Email")}
             margin="normal"
             variant="outlined"
           />{" "}
@@ -73,7 +73,7 @@ export default class MemberUserName extends Component {
           <TextField
             id="outlined-UserName"
             label="UserName"
-            value={this.state.ResidentialAd}
+            value={this.props.memDetails.UserName}
             onChange={this.handleChange("UserName")}
             margin="normal"
             variant="outlined"
@@ -82,7 +82,7 @@ export default class MemberUserName extends Component {
           <TextField
             id="outlined-PassWord"
             label="PassWord"
-            value={this.state.ResidentialAd}
+            value={this.props.memDetails.PassWord}
             onChange={this.handleChange("PassWord")}
             margin="normal"
             variant="outlined"
@@ -91,7 +91,7 @@ export default class MemberUserName extends Component {
           <TextField
             id="outlined-PassWordConfirm"
             label="PassWordConfirm"
-            value={this.state.ResidentialAd}
+            value={this.props.memDetails.PassWordConfirm}
             onChange={this.handleChange("PassWordConfirm")}
             margin="normal"
             variant="outlined"
@@ -110,10 +110,11 @@ export default class MemberUserName extends Component {
           <label>
             I Accept:
             <Checkbox
-              checked={this.state.Delaraction_Acceptance}
-              onChange={this.handleChange("Declaration_acceptance")}
-              value="Declaration"
-            />
+                    checked={this.props.memDetails.Delaraction_Acceptance}
+                    onChange={this.handleOption('Delaraction_Acceptance')}
+                    value="Delaraction_Acceptance"
+                />
+
           </label><br/>
           <Link to="/MemberAddress">
             <Fab color="primary" aria-label="Add" type="Submit">
@@ -130,3 +131,20 @@ export default class MemberUserName extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+      currPage: state.currentPage,
+      memDetails: state.signupDetails
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
+      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginDetails);
+

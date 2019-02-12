@@ -5,7 +5,9 @@ import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from '@material-ui/icons/NavigateBefore';
 import { Link } from "react-router-dom";
 
-export default class MemberRes extends Component {
+import { connect } from 'react-redux';
+class MemberAddress extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,62 +15,12 @@ export default class MemberRes extends Component {
       City: "",
       Province: "",
       Country: "",
-      PostalCode: "",
-      ResidentialAdError: "", //setting the error labels
-      CityError: "",
-      ProvinceError: "",
-      CountryError: "",
-      PostalCodeError: ""
+
+      PostalCode: ""
     };
   }
 
-  handleInputChange = event => {
-    event.preventDefault();
-    console.log(event);
-    console.log(event.target.name);
-    console.log(event.target.value);
-    const err = this.validate(); //validate the form before submitting it
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
 
-  validate = () => {
-    let isError = false;
-    const errors = {};
-    if(this.state.ResidentialAd.length < 2){
-        isError = true;
-        errors.ResidentialAdError = "minimum of 2 characters for address";
-    }
-    if(this.state.City.length < 2){
-        isError = true;
-        errors.CityError = "minimum of 2 characters for city";
-    }
-
-    if(this.state.Province.length < 2){
-        isError = true;
-        errors.ProvinceError= "invalid province";
-    }
-   
-    if(this.state.Country.value===''){
-        isError = true;
-        errors.CountryError = "country name required";
-    }
-
-    if(this.state.PostalCode.length<5){
-        isError = true;
-        errors.PostalCodeError = "invalid postal code";
-    }
-  
-    if(isError){
-        this.setState({
-            ...this.state,
-            ...errors
-        });
-    };
-
-    return isError;
-}
 
   handleSubmit = event => {
     event.preventDefault();
@@ -77,18 +29,13 @@ export default class MemberRes extends Component {
   };
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+
+    this.props.onMemberDetailsChange(event.target.value,name);
   };
 
   render() {
-    const { ResidentialAd } = this.state;
-    const { City } = this.state;
-    const { Province } = this.state;
-    const { Country } = this.state;
-    const { PostalCode } = this.state;
-
+  
+d
     return (
       <div>
         <h1>Membership Application</h1>
@@ -97,9 +44,10 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Address"
             label="Address"
-            value={this.state.ResidentialAd}
-            onChange={this.handleChange("Residence")}
-            helperText={this.state.ResidentialAdError} 
+
+            value={this.props.memDetails.ResidentialAd}
+            onChange={this.handleChange("ResidentialAd")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -107,9 +55,9 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-City"
             label="City"
-            value={this.state.City}
+            value={this.props.memDetails.City}
             onChange={this.handleChange("City")}
-            helperText={this.state.CityError} 
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -117,9 +65,9 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Province"
             label="Province"
-            value={this.state.Province}
+            value={this.props.memDetails.Province}
             onChange={this.handleChange("Province")}
-            helperText={this.state.ProvinceError} 
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -127,9 +75,8 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-Country"
             label="Country"
-            value={this.state.Country}
+            value={this.props.memDetails.Country}
             onChange={this.handleChange("Country")}
-            helperText={this.state.CountryError} 
             margin="normal"
             variant="outlined"
           />{" "}
@@ -137,9 +84,9 @@ export default class MemberRes extends Component {
           <TextField
             id="outlined-PostalCode"
             label="Postal Code"
-            value={this.state.PostalCode}
+            value={this.props.memDetails.PostalCode}
             onChange={this.handleChange("PostalCode")}
-            helperText={this.state.PostalCodeError} 
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -149,13 +96,29 @@ export default class MemberRes extends Component {
               <ArrowBack />
             </Fab>
           </Link>
-         
+          <Link to="/LoginDetails">
             <Fab color="primary" aria-label="Add" type="Submit">
               <NavigateNext />
             </Fab>
-         
+          </Link>
         </form>
       </div>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+      currPage: state.currentPage,
+      memDetails: state.signupDetails
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
+      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemberAddress);
+

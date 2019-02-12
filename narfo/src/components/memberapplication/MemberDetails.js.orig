@@ -25,6 +25,29 @@ const styles = theme => ({
   });
 
 class MemberApplication extends Component {
+   
+<<<<<<< HEAD
+    constructor(props) {
+        super(props);
+        this.state = {
+            FullName: '',
+            Surname: '',
+            IDNum: '',
+            Cell: '',
+            Occupation: '',
+            Ethnicity: '',
+            Gender: '',
+            LabelWidth: 0
+        }
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const userdata = this.state;
+        axios.post('https://localhost:44327/Member/set', userdata)
+            .then(res => {
+                console.log(res.data);
+=======
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -38,11 +61,12 @@ class MemberApplication extends Component {
     //         LabelWidth: 0
     //     }
     // }
+>>>>>>> 16cba3715e264b0715b1485273f0844190ca0767
 
     // handleSubmit = (event) => {
     //     event.preventDefault()
     //     const userdata = this.state;
-    //axios.post('https://localhost:44327/Member/set', userdata)
+    //     axios.post('http://narfo.retrotest.co.za/Member/set', userdata)
     //         .then(res => {
     //             console.log(res.data);
     //         })
@@ -59,7 +83,6 @@ class MemberApplication extends Component {
 
     handleOptionChange = changeEvent => {
         this.props.onMemberDetailsChange(changeEvent.target.value,'Gender');
-
     };
 
     render() {
@@ -127,7 +150,7 @@ class MemberApplication extends Component {
                             input={
                                 <OutlinedInput
                                     name="Ethnicity"
-                                     labelWidth= {0}
+                                    // labelWidth={this.state.LabelWidth}
                                     id="outlined-Ethnicity-native-simple"
                                 />
                             }
@@ -176,6 +199,7 @@ class MemberApplication extends Component {
 MemberApplication.propTypes = {
     classes: PropTypes.object.isRequired,
   };
+
 const mapStateToProps = state => {
     return {
         currPage: state.currentPage,

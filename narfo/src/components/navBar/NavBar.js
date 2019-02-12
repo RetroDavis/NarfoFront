@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -97,16 +98,16 @@ function ButtonAppBar(props) {
             <Typography align="left" variant="h6" color="secondary" className={classes.grow}>
               <Link className={classes.linkLeft} to='/'>NARFO</Link>
             </Typography>
-            <Button color="inherit">
-              <Link className={classes.linkRight} to="/Login">
+            <Link className={classes.linkRight} to="/Login">
+              <Button color="inherit">
                 Login
-              </Link>
-            </Button>
-            <Button color="inherit">
-              <Link className={classes.linkRight} to="/Register">
+              </Button>
+            </Link> 
+            <Link className={classes.linkRight} to="/Register">
+              <Button color="inherit">
                 Register
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -130,4 +131,10 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+const mapDispatchToProps = dispatch => {
+  return {
+      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ButtonAppBar));
