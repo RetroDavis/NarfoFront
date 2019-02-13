@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-//import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -18,14 +19,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-//import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 
-/////////////////////
-
-////////////////////
-
-//sorting by descending
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -53,46 +48,42 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: "name", numeric: false, disablePadding: true, label: "License Name " },
+  {
+    id: "LicenseName",
+    numeric: false,
+    disablePadding: true,
+    label: "License Name"
+  },
   {
     id: "Description",
     numeric: true,
     disablePadding: false,
-    align: "center",
     label: "Description"
   },
   {
     id: "ReminderType",
     numeric: true,
     disablePadding: false,
-    label: "Reminder Type "
+    label: "Reminder Type"
   },
   {
     id: "ExpiryDate",
     numeric: true,
     disablePadding: false,
-    label: "Expiry Date(g)"
+    label: "Expiry Date"
   },
   {
     id: "RemainingDays",
     numeric: true,
     disablePadding: false,
-    label: "Remaining Days "
+    label: "Days Remaining"
   }
 ];
 
-class LicenseReminderTableHead extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      License_list: []
-    };
-  }
+class ReminderTableHead extends React.Component {
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
   };
-  
 
   render() {
     const {
@@ -143,16 +134,16 @@ class LicenseReminderTableHead extends React.Component {
     );
   }
 }
-/*
-LicenseReminderTableHead.propTypes = {
+
+ReminderTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  rowCount: PropTypes.number.isRequired
 };
-*/
+
 const toolbarStyles = theme => ({
   root: {
     paddingRight: theme.spacing.unit
@@ -178,7 +169,7 @@ const toolbarStyles = theme => ({
   }
 });
 
-let LicenseReminderTableToolbar = props => {
+let ReminderTableToolbar = props => {
   const { numSelected, classes } = props;
 
   return (
@@ -207,31 +198,31 @@ let LicenseReminderTableToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Add License">
-            <Fab
-              size="small"
-              color="secondary"
-              aria-label="Add"
-              className={classes.margin}
-              //  onClick={handleClick}
-            >
-              <AddIcon />
-            </Fab>
+          <Tooltip title="Add Reminder">
+            <Link to="/AddLicense">
+              <Fab
+                size="small"
+                color="secondary"
+                aria-label="Add"
+                className={classes.margin}
+                // onClick={handleClick}
+              >
+                <AddIcon />
+              </Fab>
+            </Link>
           </Tooltip>
         )}
       </div>
     </Toolbar>
   );
 };
-/*
-LicenseReminderTableToolbar.propTypes = {
- // classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
+
+ReminderTableToolbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired
 };
-*/
-LicenseReminderTableToolbar = withStyles(toolbarStyles)(
-  LicenseReminderTableToolbar
-);
+
+ReminderTableToolbar = withStyles(toolbarStyles)(ReminderTableToolbar);
 
 const styles = theme => ({
   root: {
@@ -246,29 +237,25 @@ const styles = theme => ({
   }
 });
 
-class LicenseReminderTable extends React.Component {
+class ReminderTable extends React.Component {
+  componentDidMount() {
+    fetch("https://localhost:44327/api/license/list", { Method: "Get" })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          load: true,
+          data: json
+        });
+        console.log(json);
+      });
+    //
+  }
 
-    componentDidMount() {
-        //fetch("https://localhost:44327/api/salesReps/get/all/sales")
-        fetch("https://jsonplaceholder.typicode.com/comments")
-          .then(res => res.json())
-          .then(json => {
-            this.setState({
-              load: true,
-              data: json
-            });
-          console.log(json);
-          });
-        //
-      }
-  //this creates the values on the table plus the state of those values
   state = {
     order: "asc",
-    orderBy: "Description",
+    orderBy: "calories",
     selected: [],
     data: [],
-    load: true,
-   // arr: [],
     page: 0,
     rowsPerPage: 5
   };
@@ -283,18 +270,31 @@ class LicenseReminderTable extends React.Component {
 
     this.setState({ order, orderBy });
   };
-  //select all
+  /*
+  handleSubmit(e) {
+    e.preventDefault();
+    const input ={ body: this.state.value } ;
+    fetch("https://localhost:44327/api/license/newReminder", {
+      method: "POST",
+      body: JSON.stringify(input),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(response => console.log("Success:", JSON.stringify(response)))
+      .catch(error => console.error("Error:", error));
+  }
+
+
+*/
   handleSelectAllClick = event => {
     if (event.target.checked) {
       this.setState(state => ({ selected: state.data.map(n => n.id) }));
-      console.log(this.state.arr);
-      console.log(this.state.selected);
-      console.log(this.state.data);
       return;
     }
     this.setState({ selected: [] });
   };
-  //clicking on the  row
   handleClick = (event, id) => {
     const { selected } = this.state;
     const selectedIndex = selected.indexOf(id);
@@ -313,8 +313,6 @@ class LicenseReminderTable extends React.Component {
       );
     }
 
-    //////////////
-    // we handle the state change here
     this.setState({ selected: newSelected });
   };
 
@@ -325,8 +323,8 @@ class LicenseReminderTable extends React.Component {
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
-  ////////////
-  isSelected = id => this.state.selected.indexOf(id) !== -1; // i have no idea what you do yet
+
+  isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
     const { classes } = this.props;
@@ -336,10 +334,10 @@ class LicenseReminderTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <LicenseReminderTableToolbar numSelected={selected.length} />
+        <ReminderTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
-            <LicenseReminderTableHead
+            <ReminderTableHead
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -347,32 +345,31 @@ class LicenseReminderTable extends React.Component {
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
             />
-
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);
+                  const isSelected = this.isSelected(n.lincenceId);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      onClick={event => this.handleClick(event, n.lincenceId)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
-                      key={n.id}
+                      key={n.lincenceId}
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
-                        {n.name}
+                        {n.licenseName}
                       </TableCell>
-                      <TableCell align="right">{n.email}</TableCell>
-                      <TableCell align="right">{n.body}</TableCell>
-                      <TableCell align="right">{n.ExpiryDate}</TableCell>
-                      <TableCell align="right">{n.RemainingDays}</TableCell>
+                      <TableCell align="right">{n.description}</TableCell>
+                      <TableCell align="right">{n.reminderType}</TableCell>
+                      <TableCell align="right">{n.expiryDate}</TableCell>
+                      <TableCell align="right">{n.remainingDays}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -384,9 +381,8 @@ class LicenseReminderTable extends React.Component {
             </TableBody>
           </Table>
         </div>
-
         <TablePagination
-          rowsPerPageOptions={[5, 10, 500]}
+          rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}
@@ -405,4 +401,8 @@ class LicenseReminderTable extends React.Component {
   }
 }
 
-export default withStyles(styles)(LicenseReminderTable);
+ReminderTable.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(ReminderTable);

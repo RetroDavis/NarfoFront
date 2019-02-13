@@ -5,8 +5,8 @@ import Home from './components/main/Home';
 import Login from './components/main/Login';
 import Register from './components/main/Register';
 import NavBar from './components/navBar/NavBar';
-import LicenseReminder from './components/LicenseReminder/LicenseReminder';
-
+import AddLicense from './components/LicenseReminder/AddLicense';
+import Reminder from './components/LicenseReminder/Reminder';
 class App extends Component {
   render() {
     return (
@@ -17,8 +17,9 @@ class App extends Component {
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/Login" component={Login} exact />
-              <Route path="/Register" component={Register} exact />
-              <Route path="/LicenseReminder" component={LicenseReminder} exact />
+              <Route path="/Register" component={Register} exact />           
+              <Route path="/Reminder" component={Reminder} exact />
+              <Route path="/AddLicense" component={AddLicense} exact/>
               <Redirect from='*' to='/'/>>
             </Switch>
           </div>
