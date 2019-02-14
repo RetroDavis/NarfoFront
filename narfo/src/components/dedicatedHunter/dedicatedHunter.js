@@ -169,7 +169,7 @@ class DedicatedHunter extends Component {
             </div>
           </div>
         )}
-        {this.state.CurrentPage === 0 && (
+        {this.state.CurrentPage === 2 && (
           <div className="container mt-3 shadow">
             <div className="row mb-3">
               <div className="col mt-3">
@@ -261,6 +261,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="number"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleMembershipDuration}
                           />
                         </div>
                       </div>
@@ -378,6 +379,7 @@ class DedicatedHunter extends Component {
                           <textarea
                             className="form-control border-success text-success mr-lg-3"
                             cols="38"
+                            onChange={this.handleHuntedRelatedActivities}
                           />
                         </div>
                       )}
@@ -390,6 +392,7 @@ class DedicatedHunter extends Component {
                           <textarea
                             className="form-control border-success text-success mr-lg-3"
                             cols="38"
+                            onChange={this.handleHuntedRelatedActivities}
                           />
                         </div>
                       )}
@@ -436,6 +439,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="text"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleRegistrationNo}
                           />
                         </div>
                         <div className="form-group mr-2">
@@ -445,6 +449,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="text"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleAssociation}
                           />
                         </div>
                         <div className="form-group mr-2">
@@ -454,6 +459,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="text"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleProvince}
                           />
                         </div>
 
@@ -464,6 +470,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="Date"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleExpiryDateOfPermite}
                           />
                         </div>
                       </div>
@@ -484,6 +491,263 @@ class DedicatedHunter extends Component {
                   onClick={this.NextPage}
                 >
                   Next
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {this.state.CurrentPage === 0 && (
+          <div className="container mt-3 shadow">
+            <div className="row mb-3">
+              <div className="col mt-3">
+                <h3 className="text-center">Dedicated Status Declaration</h3>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  Are you well acquainted with the current Firearms Control Act
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  Are you well acquainted with the use and storage of your
+                  Firearm
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  Are you well acquainted with the hunting ordinances and
+                  proclamations for the provinces you intend to hunt in
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  Have you ever been found guilty of any offence related to
+                  hunting where your finger prints was taken
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  I hereby declare that all information in this document is true
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  I hereby declare that I fully understand and abide by the
+                  codes of conduct as set out by the NARFO
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row  mb-5">
+              <div className="col">
+                <p className="text-left ml-3">
+                  I hereby declare that I fully understand and abide by the
+                  Dedicated Status Declaration
+                  <span className="text-danger">*</span>
+                </p>
+                <div className="row form-check-inline">
+                  <div className="col">
+                    <label className="form-check-label">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="TheoreticalAssessment"
+                        value="Yes"
+                        onChange={this.handleTheoreticalAssessment}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  <label className="form-check-label">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      name="TheoreticalAssessment"
+                      value="No"
+                      onChange={this.handleTheoreticalAssessment}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col mb-5">
+                <button
+                  className="btn btn-dark  btn-block"
+                  onClick={this.NextPage}
+                >
+                  Submit
                 </button>
               </div>
             </div>
