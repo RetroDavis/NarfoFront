@@ -766,6 +766,55 @@ class DedicatedHunter extends Component {
                 />
               </div>
             </div>
+            <div className="row   ml-lg-3 mr-lg-3">
+              <p className="text-left ">
+                Contact details of two fellow hunters with whom you have hunted
+                or contact details of a farm which you have hunted on
+              </p>
+            </div>
+            <div className="row   ml-lg-3 mr-lg-3">
+              <div className="form-group mr-2">
+                <label for="usr" className="">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control border-success text-success mr-lg-3 "
+                  onChange={this.handleRegistrationNo}
+                />
+              </div>
+              <div className="form-group mr-2">
+                <label for="usr" className="">
+                  Tel number
+                </label>
+                <input
+                  type="text"
+                  className="form-control border-success text-success mr-lg-3 "
+                  onChange={this.handleAssociation}
+                />
+              </div>
+              <div className="form-group mr-2">
+                <label for="usr" className="">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control border-success text-success mr-lg-3 "
+                  onChange={this.handleProvince}
+                />
+              </div>
+
+              <div className="form-group mr-2">
+                <label for="usr" className="">
+                  Tel number
+                </label>
+                <input
+                  type="text"
+                  className="form-control border-success text-success mr-lg-3 "
+                  onChange={this.handleExpiryDateOfPermite}
+                />
+              </div>
+            </div>
 
             <div className="row">
               <div className="col mb-5">
