@@ -239,7 +239,7 @@ const styles = theme => ({
 
 class ReminderTable extends React.Component {
   componentDidMount() {
-    fetch("https://localhost:44327/api/license/list", { Method: "Get" })
+    fetch("https://localhost:44327/api/license/calculate", { Method: "Get" })
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -248,8 +248,10 @@ class ReminderTable extends React.Component {
         });
         console.log(json);
       });
-    //
+
+
   }
+
 
   state = {
     order: "asc",
@@ -285,6 +287,7 @@ class ReminderTable extends React.Component {
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
   }
+  
 
 
 */

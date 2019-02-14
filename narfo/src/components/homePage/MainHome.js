@@ -15,6 +15,7 @@ const styles = theme => ({
 });
 
 function MainHome(props) {
+  
   const { classes } = props;
 
   return (

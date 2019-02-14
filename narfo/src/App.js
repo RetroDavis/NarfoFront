@@ -7,6 +7,7 @@ import Register from './components/main/Register';
 import NavBar from './components/navBar/NavBar';
 import AddLicense from './components/LicenseReminder/AddLicense';
 import Reminder from './components/LicenseReminder/Reminder';
+import EditLicense from './components/LicenseReminder/EditLicense';
 class App extends Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class App extends Component {
               <Route path="/Register" component={Register} exact />           
               <Route path="/Reminder" component={Reminder} exact />
               <Route path="/AddLicense" component={AddLicense} exact/>
+              <Route path="/EditLicense" component={EditLicense} exact/>
               <Redirect from='*' to='/'/>>
             </Switch>
           </div>

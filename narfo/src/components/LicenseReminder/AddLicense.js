@@ -27,7 +27,8 @@ export default class AddLicense extends Component {
     Description: "",
     ReminderType: "",
     ExpiryDate: "",
-    selectedDate: new Date("2014-08-18T21:11:54")
+    selectedDate: new Date("2014-08-18T21:11:54"),
+   
   };
 
   handleChange = name => event => {
@@ -41,12 +42,16 @@ export default class AddLicense extends Component {
     console.log(this.state.ReminderType);
     console.log(this.state.ExpiryDate);
   };
-  handleSubmit(e) {
-    e.preventDefault();
-    const input = { body: this.state};
+  handleSubmit = (e) => {
+      var _th = this;
+     e.preventDefault();
+    debugger;
+    
+   // var postBoday = JSON.stringify({ "LicenseName": _th.state.LicenseName,"Description": _th.state.Description, "ReminderType": _th.state.ReminderType, "ExpiryDate": _th.state.ExpiryDate, "ExpiryDate": _th.state.ExpiryDate});
     fetch("https://localhost:44327/api/license/newReminder", {
       method: "POST",
-      body: JSON.stringify(input),
+      body: JSON.stringify({ "LicenseName": _th.state.LicenseName,"Description": _th.state.Description, "ReminderType": _th.state.ReminderType, "ExpiryDate": _th.state.ExpiryDate}     
+      ),
       headers: {
         "Content-Type": "application/json"
       }
@@ -55,6 +60,52 @@ export default class AddLicense extends Component {
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
   }
+/*
+
+axios.post('https://localhost:44327/api/Member/post/login', user)
+.then(res => {
+if(this.state.isChecked){
+localStorage.setItem('tokenKey', res.data.token);
+console.log("local: " + res.data.token);
+this.props.history.push("/");
+}else{
+sessionStorage.setItem('tokenKey',res.data.token);
+console.log("session: " + res.data.token);
+// _this.props.history.push('/');
+}
+// valid= true;
+})
+*/
+
+/*
+  function register(user) {
+    console.log(JSON.stringify(user));
+    const requestOptions = {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type':'application/json'
+    },
+    body: JSON.stringify({
+    FirstName: user.firstName,
+    LastName: user.lastName,
+    Username: user.username,
+    Password: user.password
+    })
+    };
+    
+    return fetch(`${URL}/users/register`, requestOptions).then(
+        function(handleResponse){
+            console.log(handleResponse);
+        }
+    );
+    }
+
+*/
+
+
+
+
   render() {
     //   const { selectedDate } = this.state;
     // const { classes } = this.props;
