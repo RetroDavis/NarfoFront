@@ -22,10 +22,140 @@ class DedicatedHunter extends Component {
       RegistrationNo: "",
       Association: "",
       Province: "",
-      ExpiryDateOfPermit: ""
+      ExpiryDateOfPermit: "",
+      FirearmsControlAct: "",
+      StorageOfFirearm: "",
+      HuntingOrdinances: "",
+      FoundGuilty: "",
+      DeclareInformation: "",
+      CodesOfConduct: "",
+      DedicatedStatusDeclaration: "",
+      Motivation: "",
+      Name1: "",
+      Tel1: "",
+      Name2: "",
+      Tel2: "",
+      error: ""
     };
     this.NextPage = this.NextPage.bind(this);
+    this.NextPage1 = this.NextPage1.bind(this);
   }
+
+  NextPage1() {
+    var next = false;
+    const findValues = {
+      CurentDedicatedStatus: this.state.CurentDedicatedStatus,
+      AttendedHunting: this.state.AttendedHunting,
+      RegisteredPH: this.state.RegisteredPH
+    };
+    console.log(findValues);
+    this.setState({ error: "" });
+    if (
+      this.state.CurentDedicatedStatus === "" ||
+      this.state.AttendedHunting === "" ||
+      this.state.RegisteredPH === ""
+    ) {
+      this.setState({ error: "Please fill in all inputs" });
+    } else {
+      next = true;
+    }
+
+    if (next && this.state.CurentDedicatedStatus === "No") {
+      if (
+        this.state.PracticalAssignment === "" ||
+        this.state.TheoreticalAssessment === ""
+      ) {
+        this.setState({ error: "Please fill in all inputs" });
+        next = false;
+      } else if (this.state.PracticalAssignment === "No") {
+        this.setState({
+          error: "Please Complete Practical Assignment first to apply"
+        });
+        next = false;
+      } else if (this.state.TheoreticalAssessment === "No") {
+        this.setState({
+          error: "Please Complete Theoretical Assignment first to apply"
+        });
+        next = false;
+      }
+    } else if (next && this.state.CurentDedicatedStatus === "Yes") {
+    }
+
+    if (next) {
+      const newPage = 1 + this.state.CurrentPage;
+      this.setState({ CurrentPage: newPage });
+    }
+  }
+
+  handleName1 = event => {
+    this.setState({
+      Name1: event.target.value
+    });
+  };
+  handleTel1 = event => {
+    this.setState({
+      Tel1: event.target.value
+    });
+  };
+
+  handleName2 = event => {
+    this.setState({
+      Name2: event.target.value
+    });
+  };
+  handleTel2 = event => {
+    this.setState({
+      Tel2: event.target.value
+    });
+  };
+
+  handleMotivation = event => {
+    this.setState({
+      Motivation: event.target.value
+    });
+  };
+
+  handleDedicatedStatusDeclaration = event => {
+    this.setState({
+      DedicatedStatusDeclaration: event.target.value
+    });
+  };
+
+  handleCodesOfConduct = event => {
+    this.setState({
+      CodesOfConduct: event.target.value
+    });
+  };
+
+  handleDeclareInformation = event => {
+    this.setState({
+      DeclareInformation: event.target.value
+    });
+  };
+
+  handleFoundGuilty = event => {
+    this.setState({
+      FoundGuilty: event.target.value
+    });
+  };
+
+  handleHuntingOrdinances = event => {
+    this.setState({
+      HuntingOrdinances: event.target.value
+    });
+  };
+
+  handleStorageOfFirearm = event => {
+    this.setState({
+      StorageOfFirearm: event.target.value
+    });
+  };
+
+  handleFirearmsControlAct = event => {
+    this.setState({
+      FirearmsControlAct: event.target.value
+    });
+  };
 
   handleExpiryDateOfPermite = event => {
     this.setState({
@@ -169,7 +299,7 @@ class DedicatedHunter extends Component {
             </div>
           </div>
         )}
-        {this.state.CurrentPage === 2 && (
+        {this.state.CurrentPage === 0 && (
           <div className="container mt-3 shadow">
             <div className="row mb-3">
               <div className="col mt-3">
@@ -481,14 +611,16 @@ class DedicatedHunter extends Component {
             </div>
 
             <div className="row mb-2">
-              <div className="col  text-danger text-center"> </div>
+              <div className="col  text-danger text-center">
+                {this.state.error}
+              </div>
             </div>
 
             <div className="row">
               <div className="col mb-5">
                 <button
                   className="btn btn-dark  btn-block"
-                  onClick={this.NextPage}
+                  onClick={this.NextPage1}
                 >
                   Next
                 </button>
@@ -497,7 +629,7 @@ class DedicatedHunter extends Component {
           </div>
         )}
 
-        {this.state.CurrentPage === 0 && (
+        {this.state.CurrentPage === 2 && (
           <div className="container mt-3 shadow">
             <div className="row mb-3">
               <div className="col mt-3">
@@ -517,9 +649,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="FirearmsControlAct"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleFirearmsControlAct}
                       />
                       Yes
                     </label>
@@ -528,9 +660,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="FirearmsControlAct"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleFirearmsControlAct}
                     />
                     No
                   </label>
@@ -551,9 +683,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="StorageOfFirearm"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleStorageOfFirearm}
                       />
                       Yes
                     </label>
@@ -562,9 +694,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="StorageOfFirearm"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleStorageOfFirearm}
                     />
                     No
                   </label>
@@ -585,9 +717,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="HuntingOrdinances"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleHuntingOrdinances}
                       />
                       Yes
                     </label>
@@ -596,9 +728,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="HuntingOrdinances"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleHuntingOrdinances}
                     />
                     No
                   </label>
@@ -619,9 +751,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="FoundGuilty"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleFoundGuilty}
                       />
                       Yes
                     </label>
@@ -630,9 +762,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="FoundGuilty"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleFoundGuilty}
                     />
                     No
                   </label>
@@ -652,9 +784,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="DeclareInformation"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleDeclareInformation}
                       />
                       Yes
                     </label>
@@ -663,9 +795,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="DeclareInformation"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleDeclareInformation}
                     />
                     No
                   </label>
@@ -686,9 +818,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="CodesOfConduct"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleCodesOfConduct}
                       />
                       Yes
                     </label>
@@ -697,9 +829,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="CodesOfConduct"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleCodesOfConduct}
                     />
                     No
                   </label>
@@ -720,9 +852,9 @@ class DedicatedHunter extends Component {
                       <input
                         type="radio"
                         className="form-check-input"
-                        name="TheoreticalAssessment"
+                        name="DedicatedStatusDeclaration"
                         value="Yes"
-                        onChange={this.handleTheoreticalAssessment}
+                        onChange={this.handleDedicatedStatusDeclaration}
                       />
                       Yes
                     </label>
@@ -731,9 +863,9 @@ class DedicatedHunter extends Component {
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="TheoreticalAssessment"
+                      name="DedicatedStatusDeclaration"
                       value="No"
-                      onChange={this.handleTheoreticalAssessment}
+                      onChange={this.handleDedicatedStatusDeclaration}
                     />
                     No
                   </label>
@@ -762,7 +894,7 @@ class DedicatedHunter extends Component {
                   className="form-control border-success text-success mr-lg-3"
                   cols="68"
                   rows="8"
-                  onChange={this.handleHuntedRelatedActivities}
+                  onChange={this.handleMotivation}
                 />
               </div>
             </div>
@@ -780,7 +912,7 @@ class DedicatedHunter extends Component {
                 <input
                   type="text"
                   className="form-control border-success text-success mr-lg-3 "
-                  onChange={this.handleRegistrationNo}
+                  onChange={this.handleName1}
                 />
               </div>
               <div className="form-group mr-2">
@@ -790,7 +922,7 @@ class DedicatedHunter extends Component {
                 <input
                   type="text"
                   className="form-control border-success text-success mr-lg-3 "
-                  onChange={this.handleAssociation}
+                  onChange={this.handleTel1}
                 />
               </div>
               <div className="form-group mr-2">
@@ -800,7 +932,7 @@ class DedicatedHunter extends Component {
                 <input
                   type="text"
                   className="form-control border-success text-success mr-lg-3 "
-                  onChange={this.handleProvince}
+                  onChange={this.handleName2}
                 />
               </div>
 
@@ -811,7 +943,7 @@ class DedicatedHunter extends Component {
                 <input
                   type="text"
                   className="form-control border-success text-success mr-lg-3 "
-                  onChange={this.handleExpiryDateOfPermite}
+                  onChange={this.handleTel2}
                 />
               </div>
             </div>
