@@ -12,10 +12,80 @@ class DedicatedHunter extends Component {
       TheoreticalAssessment: "",
       CurrentOption: "",
       AttendedHunting: "",
-      RegisteredPH: ""
+      RegisteredPH: "",
+      AssociationName: "",
+      AssociationFAR: "",
+      DedicatedStatusNo: "",
+      ExpiryDateOfMembership: "",
+      MembershipDuration: "",
+      HuntedRelatedActivities: "",
+      RegistrationNo: "",
+      Association: "",
+      Province: "",
+      ExpiryDateOfPermit: ""
     };
     this.NextPage = this.NextPage.bind(this);
   }
+
+  handleExpiryDateOfPermite = event => {
+    this.setState({
+      ExpiryDateOfPermit: event.target.value
+    });
+  };
+
+  handleProvince = event => {
+    this.setState({
+      Province: event.target.value
+    });
+  };
+
+  handleAssociation = event => {
+    this.setState({
+      Association: event.target.value
+    });
+  };
+
+  handleRegistrationNo = event => {
+    this.setState({
+      RegistrationNo: event.target.value
+    });
+  };
+
+  handleHuntedRelatedActivities = event => {
+    this.setState({
+      HuntedRelatedActivities: event.target.value
+    });
+  };
+
+  handleMembershipDuration = event => {
+    this.setState({
+      MembershipDuration: event.target.value
+    });
+  };
+
+  handleExpiryDateOfMembership = event => {
+    this.setState({
+      ExpiryDateOfMembership: event.target.value
+    });
+  };
+  handleDedicatedStatusNo = event => {
+    this.setState({
+      DedicatedStatusNo: event.target.value
+    });
+  };
+
+  handleAssociationFAR = event => {
+    this.setState({
+      AssociationFAR: event.target.value
+    });
+  };
+
+  handleAssociationName = event => {
+    this.setState({
+      AssociationName: event.target.value
+    });
+  };
+
   handleCurentDedicatedStatus = event => {
     this.setState({
       CurentDedicatedStatus: event.target.value
@@ -148,6 +218,7 @@ class DedicatedHunter extends Component {
                           <input
                             type="text"
                             className="form-control border-success text-success mr-lg-3 "
+                            onChange={this.handleAssociationName}
                           />
                         </div>
                         <div className="form-group mr-2">
@@ -156,6 +227,7 @@ class DedicatedHunter extends Component {
                           </label>
                           <input
                             type="text"
+                            onChange={this.handleAssociationFAR}
                             className="form-control border-success text-success mr-lg-3 "
                           />
                         </div>
@@ -165,6 +237,7 @@ class DedicatedHunter extends Component {
                           </label>
                           <input
                             type="text"
+                            onChange={this.handleDedicatedStatusNo}
                             className="form-control border-success text-success mr-lg-3 "
                           />
                         </div>
@@ -175,6 +248,7 @@ class DedicatedHunter extends Component {
                           </label>
                           <input
                             type="Date"
+                            onChange={this.handleExpiryDateOfMembership}
                             className="form-control border-success text-success mr-lg-3 "
                           />
                         </div>
