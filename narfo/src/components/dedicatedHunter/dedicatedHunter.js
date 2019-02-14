@@ -742,6 +742,32 @@ class DedicatedHunter extends Component {
             </div>
 
             <div className="row">
+              <div className="col mt-3 mb-5 mr-3 ml-3 text-left  text-danger">
+                <span className="font-weight-bold">PLEASE NOTE: </span>
+                Your motivation should be related to hunting and or hunting
+                activities. Your application will not be considered if you
+                merely want more firearms. Becoming a dedicated hunter means
+                that you actively want to participate in hunting activities and
+                also need to prove that you have done so to keep your status,
+                failing which, you may lose your status
+              </div>
+            </div>
+            <div className="row   ml-lg-3 mr-lg-3">
+              <div className="form-group mr-2">
+                <label for="usr" className="">
+                  Motivate why you are applying for a dedicated hunter status
+                  <span className="text-danger">*</span>
+                </label>
+                <textarea
+                  className="form-control border-success text-success mr-lg-3"
+                  cols="68"
+                  rows="8"
+                  onChange={this.handleHuntedRelatedActivities}
+                />
+              </div>
+            </div>
+
+            <div className="row">
               <div className="col mb-5">
                 <button
                   className="btn btn-dark  btn-block"
