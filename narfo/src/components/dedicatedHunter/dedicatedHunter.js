@@ -39,8 +39,67 @@ class DedicatedHunter extends Component {
     };
     this.NextPage = this.NextPage.bind(this);
     this.NextPage1 = this.NextPage1.bind(this);
+    this.FinalSubmit = this.FinalSubmit.bind(this);
   }
 
+  FinalSubmit() {
+    var next = false;
+    this.setState({ error: "" });
+
+    if (
+      this.state.FirearmsControlAct === "" ||
+      this.state.StorageOfFirearm === "" ||
+      this.state.HuntingOrdinances === "" ||
+      this.state.FoundGuilty === "" ||
+      this.state.DeclareInformation === "" ||
+      this.state.CodesOfConduct === "" ||
+      this.state.DedicatedStatusDeclaration === ""
+    ) {
+      this.setState({ error: "Please fill in all inputs" });
+      next = false;
+    } else {
+      next = true;
+    }
+
+    if (
+      next &&
+      (this.state.FirearmsControlAct === "No" ||
+        this.state.StorageOfFirearm === "No" ||
+        this.state.HuntingOrdinances === "No" ||
+        this.state.FoundGuilty === "Yes" ||
+        this.state.DeclareInformation === "No" ||
+        this.state.CodesOfConduct === "No" ||
+        this.state.DedicatedStatusDeclaration === "No")
+    ) {
+      this.setState({
+        error: "Unable to submit please understand the declaration"
+      });
+      next = false;
+    } else {
+      next = true;
+    }
+    if (next && this.state.Motivation === "") {
+      this.setState({ error: "Please add your motivation" });
+      next = false;
+    } else {
+      next = true;
+    }
+    if (
+      next &&
+      (this.state.Name1 === "" ||
+        this.state.Tel1 === "" ||
+        this.state.Name2 === "" ||
+        this.state.Tel2 === "")
+    ) {
+      this.setState({ error: "Please fill fellow hunter details" });
+      next = false;
+    } else {
+      next = true;
+    }
+
+    if (next) {
+    }
+  }
   NextPage1() {
     var next = false;
     const findValues = {
@@ -79,6 +138,23 @@ class DedicatedHunter extends Component {
         next = false;
       }
     } else if (next && this.state.CurentDedicatedStatus === "Yes") {
+      if (this.state.AssociationName === "") {
+        this.setState({
+          error: "Please Enter Association Name "
+        });
+        next = false;
+      } else if (this.state.MembershipDuration === "") {
+        this.setState({
+          error: "Please enter membership duration "
+        });
+        next = false;
+      }
+    }
+    if (next && this.state.HuntedRelatedActivities === "") {
+      this.setState({
+        error: "Please Provide details or motivation"
+      });
+      next = false;
     }
 
     if (next) {
@@ -299,7 +375,7 @@ class DedicatedHunter extends Component {
             </div>
           </div>
         )}
-        {this.state.CurrentPage === 0 && (
+        {this.state.CurrentPage === 2 && (
           <div className="container mt-3 shadow">
             <div className="row mb-3">
               <div className="col mt-3">
@@ -629,7 +705,7 @@ class DedicatedHunter extends Component {
           </div>
         )}
 
-        {this.state.CurrentPage === 2 && (
+        {this.state.CurrentPage === 0 && (
           <div className="container mt-3 shadow">
             <div className="row mb-3">
               <div className="col mt-3">
@@ -948,11 +1024,17 @@ class DedicatedHunter extends Component {
               </div>
             </div>
 
+            <div className="row mb-2">
+              <div className="col  text-danger text-center">
+                {this.state.error}
+              </div>
+            </div>
+
             <div className="row">
               <div className="col mb-5">
                 <button
                   className="btn btn-dark  btn-block"
-                  onClick={this.NextPage}
+                  onClick={this.FinalSubmit}
                 >
                   Submit
                 </button>
