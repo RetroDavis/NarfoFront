@@ -21,6 +21,7 @@ class SalesDetails extends Component {
       labelWidth: 0,
       isLoaded: false,
       UserID: ""
+      
     };
   }
 
