@@ -10,21 +10,16 @@ import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from "@material-ui/icons/NavigateBefore";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 class SalesDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Accept_Electronic_Comms: false,
-      Sales_Representitive: "",
-      Sales_list: "",
-      Store: "",
-      Store_list: [],
-      CurrentMember_Associaton: false,
-      communication_Policy: false,
       labelWidth: 0,
       isLoaded: false,
-      CallResult: []
+      UserID: ""
     };
   }
 
@@ -40,26 +35,25 @@ class SalesDetails extends Component {
     this.props.onMemberDetailsChange(event.target.checked, name);
   };
 
-  componentDidMount(){
-    fetch('https://localhost:44327/api/salesReps/get/all/sales')
-    .then(res => res.json())
-    .then(json => {
-    this.setState({
-    isLoaded: true,
-    CallResult: json.members
-    })
-    });
-    
-    fetch('https://localhost:44327/api/Branches')
-    .then(res => res.json())
-    .then(json => {
-    this.setState({
-    isLoaded: true,
-    Store_list: json.branchName
-    })
-    });
-    
-    }
+  componentDidMount() {
+    fetch("https://localhost:44327/api/salesReps/get/all/sales")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          CallResult: json.members
+        });
+      });
+
+    fetch("https://localhost:44327/api/Branches")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isLoaded: true,
+          Store_list: json.branchName
+        });
+      });
+  }
 
   handleInputChange = event => {
     event.preventDefault();
@@ -69,21 +63,33 @@ class SalesDetails extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.CallResult);
+    axios
+      .post(
+        "https://localhost:44327/api/Member/post/set",
+        this.props.memDetails
+      )
+      .then(res => {
+        console.log(this.props.memDetails.Email);
+      })
+      .catch(function(error) {});
+
+    fetch("https://localhost:44327/api/Member/get/Last/MemNum")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          UserID: data.members.memberNumber
+        });
+        // debugger;
+        var value = this.state.UserID;
+        var _th = this.props.memDetails;
+
+        this.props.onMemberDetailsChange(this.state.UserID, "MemNo");
+      });
   };
 
   render() {
     let { isLoaded, items } = this.state;
-    const { Accept_Electronic_Comms } = this.state;
-    const { Sales_Representitive } = this.state;
-    const Sales_list = ["hello", "goodbye"];
-    const { Store } = this.state;
-    const { CurrentMember_Associaton } = this.state;
 
-    // let Sales_list = this.props.state.Sales_list;
-    // let optionItems = Sales_list.map((planet) =>
-    //         <option key={planet.name}>{planet.name}</option>
-    // );
     return (
       <div>
         <h1>Membership Application</h1>
@@ -152,7 +158,7 @@ class SalesDetails extends Component {
               checked={this.props.memDetails.CurrentMember_Associaton === "Yes"}
               onChange={this.handleChange("CurrentMember_Associaton")}
               value="Yes"
-              name="radio-button-demo"
+              name="radio-button-Yes"
               aria-label="Yes"
             />
             Yes
@@ -160,7 +166,7 @@ class SalesDetails extends Component {
               checked={this.props.memDetails.CurrentMember_Associaton === "No"}
               onChange={this.handleChange("CurrentMember_Associaton")}
               value="No"
-              name="radio-button-demo"
+              name="radio-button-No"
               aria-label="No"
             />
             No
@@ -175,21 +181,33 @@ class SalesDetails extends Component {
             />
           </label>
           <br />
+          {/* <Link to="/MemberDone"> */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.SearchMember}
+          >
+            Submit
+          </Button>
+          {/* </Link> */}
+          <br />
+          <br />
           <Link to="/Declaration">
             <Fab color="primary" aria-label="Add" type="Submit">
               <ArrowBack />
             </Fab>
           </Link>
-          <Link to="/MemberDone">
-            <Fab color="primary" aria-label="Add" type="Submit">
-              <NavigateNext />
-            </Fab>
-          </Link>
+          {/* <Link to="/MemberDone"> */}
+          <Fab color="primary" aria-label="Add" type="Submit">
+            <NavigateNext />
+          </Fab>
+          {/* </form></Link> */}
         </form>
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     currPage: state.currentPage,

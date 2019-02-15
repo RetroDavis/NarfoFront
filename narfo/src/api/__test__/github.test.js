@@ -19,7 +19,7 @@ describe('#getUser() using Promises', () => {
     return github.getUser('MasulukeI')
     .then(data => {
     
-      expect(data.entity.members.firstname).toEqual('fhg')
+      expect(data.entity.members.firstname).toEqual('Johann Heirich')
     })
   })
 })

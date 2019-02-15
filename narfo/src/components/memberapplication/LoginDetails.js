@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
-import Fab from '@material-ui/core/Fab';
-import NavigateNext from '@material-ui/icons/NavigateNext';
-import ArrowBack from '@material-ui/icons/NavigateBefore';
+import Fab from "@material-ui/core/Fab";
+import NavigateNext from "@material-ui/icons/NavigateNext";
+import ArrowBack from "@material-ui/icons/NavigateBefore";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
- class LoginDetails extends Component {
+class LoginDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      Email: "",
-      UserName: "",
-      PassWord: "",
-      PassWordConfirm: "",
-      Delaraction_Acceptance: false
-    };
+    this.state = {};
   }
 
   handleChange = name => event => {
-    this.props.onMemberDetailsChange(event.target.value,name);;
+    this.props.onMemberDetailsChange(event.target.value, name);
   };
 
   handleInputChange = event => {
@@ -40,16 +34,14 @@ import { connect } from 'react-redux';
     console.log(userData);
   };
 
- 
   handleOption = name => event => {
-    this.props.onMemberDetailsChange(event.target.checked,name);;
+    this.props.onMemberDetailsChange(event.target.checked, name);
   };
 
   render() {
-
     return (
       <div>
-         <h1>Membership Application</h1>
+        <h1>Membership Application</h1>
         <h2>Login Details</h2>
         <form onSubmit={this.handleSubmit}>
           <TextField
@@ -62,28 +54,28 @@ import { connect } from 'react-redux';
           />{" "}
           <br />
           <TextField
-            id="outlined-UserName"
-            label="UserName"
-            value={this.props.memDetails.UserName}
-            onChange={this.handleChange("UserName")}
+            id="outlined-Username"
+            label="Username"
+            value={this.props.memDetails.Username}
+            onChange={this.handleChange("Username")}
             margin="normal"
             variant="outlined"
           />{" "}
           <br />
           <TextField
-            id="outlined-PassWord"
-            label="PassWord"
-            value={this.props.memDetails.PassWord}
-            onChange={this.handleChange("PassWord")}
+            id="outlined-Password"
+            label="Password"
+            value={this.props.memDetails.Password}
+            onChange={this.handleChange("Password")}
             margin="normal"
             variant="outlined"
           />{" "}
           <br />
           <TextField
-            id="outlined-PassWordConfirm"
-            label="PassWordConfirm"
-            value={this.props.memDetails.PassWordConfirm}
-            onChange={this.handleChange("PassWordConfirm")}
+            id="outlined-PasswordConfirm"
+            label="PasswordConfirm"
+            value={this.props.memDetails.PasswordConfirm}
+            onChange={this.handleChange("PasswordConfirm")}
             margin="normal"
             variant="outlined"
           />{" "}
@@ -92,7 +84,7 @@ import { connect } from 'react-redux';
             I hereby declare that the information furnished above and the
             confirmation questions below is true and correct to the best of my
             knowledge and I undertake to inform the NARFO of any changes in
-            herein by either updating my profile or electronically or by email
+            herein by either updating my profile or electronically or by Email
             informing the NARFO of changes. In the event that the information is
             found to be false or misleading or misrepresenting, I am aware that
             my membership may be cancelled.
@@ -101,11 +93,12 @@ import { connect } from 'react-redux';
           <label>
             I Accept:
             <Checkbox
-                    checked={this.props.memDetails.Delaraction_Acceptance}
-                    onChange={this.handleOption('Delaraction_Acceptance')}
-                    value="Delaraction_Acceptance"
-                />
-          </label><br/>
+              checked={this.props.memDetails.Delaraction_Acceptance}
+              onChange={this.handleOption("Delaraction_Acceptance")}
+              value="Delaraction_Acceptance"
+            />
+          </label>
+          <br />
           <Link to="/MemberAddress">
             <Fab color="primary" aria-label="Add" type="Submit">
               <ArrowBack />
@@ -123,16 +116,25 @@ import { connect } from 'react-redux';
 }
 const mapStateToProps = state => {
   return {
-      currPage: state.currentPage,
-      memDetails: state.signupDetails
+    currPage: state.currentPage,
+    memDetails: state.signupDetails
   };
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-      onPageChange: (pageName) => dispatch({type: 'UPDATE_CURRENT_PAGE', currPage:pageName}),
-      onMemberDetailsChange: (value,vname) => dispatch({type: 'UPDATE_MEMBER_DETAILS', varValue:value, varName:vname})
-  }
-}
+    onPageChange: pageName =>
+      dispatch({ type: "UPDATE_CURRENT_PAGE", currPage: pageName }),
+    onMemberDetailsChange: (value, vname) =>
+      dispatch({
+        type: "UPDATE_MEMBER_DETAILS",
+        varValue: value,
+        varName: vname
+      })
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginDetails);

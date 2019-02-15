@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "adapter": "0.0.1",
     "axios": "^0.18.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -27,5 +28,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1"
+  }
 }
