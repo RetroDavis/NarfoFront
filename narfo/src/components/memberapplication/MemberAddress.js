@@ -6,6 +6,7 @@ import ArrowBack from "@material-ui/icons/NavigateBefore";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 class MemberAddress extends Component {
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -50,6 +51,7 @@ class MemberAddress extends Component {
             label="City"
             value={this.props.memDetails.City}
             onChange={this.handleChange("City")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -59,6 +61,7 @@ class MemberAddress extends Component {
             label="Province"
             value={this.props.memDetails.Province}
             onChange={this.handleChange("Province")}
+
             margin="normal"
             variant="outlined"
           />{" "}
@@ -68,6 +71,7 @@ class MemberAddress extends Component {
             label="Postal Code"
             value={this.props.memDetails.PostalCode}
             onChange={this.handleChange("PostalCode")}
+
             margin="normal"
             variant="outlined"
           />{" "}

@@ -5,6 +5,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Checkbox from "@material-ui/core/Checkbox";
 import Radio from "@material-ui/core/Radio";
+
 import Fab from "@material-ui/core/Fab";
 import NavigateNext from "@material-ui/icons/NavigateNext";
 import ArrowBack from "@material-ui/icons/NavigateBefore";
@@ -232,3 +233,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SalesDetails);
+

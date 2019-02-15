@@ -47,6 +47,7 @@ class LoginDetails extends Component {
           <TextField
             id="outlined-Email"
             label="Email"
+
             value={this.props.memDetails.Email}
             onChange={this.handleChange("Email")}
             margin="normal"
@@ -114,6 +115,7 @@ class LoginDetails extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     currPage: state.currentPage,

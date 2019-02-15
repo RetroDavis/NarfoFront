@@ -44,7 +44,9 @@ class Declaration extends Component {
     return (
       <div>
         <h1>Membership Application</h1>
+
         <h2>Declaration</h2>
+
         <form onSubmit={this.handleSubmit}>
           <label>
             Are you well acquainted with the current Firearms Control Act
@@ -172,6 +174,7 @@ class Declaration extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     currPage: state.currentPage,
